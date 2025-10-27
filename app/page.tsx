@@ -8,11 +8,12 @@ export default function Home() {
         <h2 className="text-center text-xl font-bold">Braifz</h2>
         <p className="text-xs opacity-50 text-center">Under Construction</p>
 
+
         <div className="flex space-x-2 pt-4">
           <Link
             href="https://linkedin.com/in/braifz"
             target="_blank"
-            className="bg-white rounded-full p-2"
+            className="bg-white rounded-full p-2 hover:scale-110 transition-all"
           >
             <Image
               src="/logos/linkedin.svg"
@@ -25,7 +26,7 @@ export default function Home() {
           <Link
             href="https://github.com/braifz"
             target="_blank"
-            className="bg-white rounded-full p-2"
+            className="bg-white rounded-full p-2 hover:scale-110 transition-all"
           >
             <Image
               src="/logos/github.svg"
@@ -37,12 +38,14 @@ export default function Home() {
           <Link
             href="https://x.com/braifz"
             target="_blank"
-            className="bg-white rounded-full p-2"
+            className="bg-white rounded-full p-2 hover:scale-110 transition-all"
           >
             <Image src="/logos/x.svg" alt="X" width={16} height={16} />
           </Link>
         </div>
       </div>
+    
     </div>
+    
   );
 }
