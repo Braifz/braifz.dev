@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SplashCursor } from "../src/components/SplashCursor/SplashCursor";
 
 export default function Home() {
   return (
@@ -7,7 +8,6 @@ export default function Home() {
       <div className="vertical items-center space-y-1">
         <h2 className="text-center text-xl font-bold">Braifz</h2>
         <p className="text-xs opacity-50 text-center">Under Construction</p>
-
 
         <div className="flex space-x-2 pt-4">
           <Link
@@ -44,8 +44,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
-    
+      <SplashCursor />
     </div>
-    
   );
 }
