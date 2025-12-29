@@ -1,17 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SplashCursor } from "@/src/components/SplashCursor/SplashCursor";
+import { ThemeProvider } from "next-themes";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Braifz",
@@ -24,12 +31,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={` ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-          <SplashCursor/>
+    <html lang="en" suppressHydrationWarning>
+      <body className={` ${inter.variable} antialiased container mx-auto`}>
+        <ThemeProvider>{children}</ThemeProvider>
+        {/* <SplashCursor /> */}
       </body>
     </html>
   );
