@@ -1,13 +1,12 @@
 "use client";
 
+import Rubik from "@/src/components/RubikCube/RubikCube";
 import { gsap, SplitText } from "@/src/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import { Environment, Grid } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Environment, Grid, OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { unknown } from "zod";
 
 export default function Home() {
   useGSAP(() => {
@@ -17,16 +16,16 @@ export default function Home() {
     });
 
     gsap.from(split.words, {
-      duration: 2,
+      duration: 1,
       y: 100, // animate from 100px below
       autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       stagger: 0.2, // 0.05 seconds between each
     });
 
     gsap.from(textOpacity.lines, {
-      duration: 4,
+      duration: 1,
       opacity: 0, // animate from opacity: 0
-      autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
+      // autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       stagger: 0.1, // 0.05 seconds between each
     });
   }, []);
@@ -34,28 +33,41 @@ export default function Home() {
   return (
     <div>
       {/* // TODO: move to a new component */}
-      <header>{/* Navbar Section */}</header>
-      <div className="flex h-dvh">
+      <header className=" ">
+        {/* Navbar Section */}
+        <div className="flex gap-10 justify-end pr-44 pt-4 ">
+          <Link
+            href="/blog"
+            className="text-lg hover:border-b border-white transition-all"
+          >
+            blog
+          </Link>
+        </div>
+      </header>
+      <div className="flex  pt-10">
         {/* Presentation Section  */}
-        <div className="w-1/2 flex flex-col gap-2 justify-center pl-14">
+        <div className="w-1/2 flex flex-col justify-center pl-14">
           <div>
             <h4 className="text-2xl font-bold pl-1 text-opacity text-muted-foreground">
               Braifz
             </h4>
-            <h2 className="text-8xl font-bold split">Frontend Developer</h2>
+            <h2 className="text-8xl font-bold split italic border-b-2 pb-4">
+              Frontend Developer
+            </h2>
           </div>
-          <p className="text-lg mt-6 pl-1 text-opacity text-muted-foreground">
-            Desarrollador frontend con 3 años de experiencia creando productos
-            digitales. Disfruto trabajar en entornos dinámicos, especialmente en
-            startups de producto, donde puedo aprender rápido, adaptarme a los
-            cambios y colaborar de forma cercana con diseñadores y equipos de
-            producto.
+          <p className="text-lg pt-6 pr-3 pl-1 text-opacity text-muted-foreground pb-4">
+            ¡Hola! Soy Braifz, un desarrollador con 3 años de experiencia
+            creando aplicaciones web. Me gusta hacer interfaces atractivas,
+            interactivas y performantes. Actualmente disfruto trabajando con
+            React, Next.js y Three.js para construir experiencias web
+            inmersivas, también paso mis ratos leyendo y aprendiendo sobre LLM y
+            IA.
           </p>
           <div className="flex gap-20 justify-center mt-8 pr-20 ">
             <Link
               href="https://linkedin.com/in/braifz"
               target="_blank"
-              className="bg-white rounded-full p-2 hover:scale-110 transition-all"
+              className="bg-white w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
             >
               <Image
                 src="/logos/linkedin.svg"
@@ -68,7 +80,7 @@ export default function Home() {
             <Link
               href="https://github.com/braifz"
               target="_blank"
-              className="bg-white rounded-full p-2 hover:scale-110 transition-all"
+              className="bg-white w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
             >
               <Image
                 src="/logos/github.svg"
@@ -80,7 +92,7 @@ export default function Home() {
             <Link
               href="https://x.com/braifz"
               target="_blank"
-              className="bg-white rounded-full p-2 hover:scale-110 transition-all"
+              className="bg-white w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
             >
               <Image src="/logos/x.svg" alt="X" width={16} height={16} />
             </Link>
@@ -88,7 +100,7 @@ export default function Home() {
         </div>
 
         {/* Three js section - 3D element  */}
-        <div className="w-1/2">
+        <div className="w-1/2 border-white border-l-2">
           <Scene />
         </div>
       </div>
@@ -98,29 +110,20 @@ export default function Home() {
 
 const Scene = () => {
   return (
-    <Canvas shadows camera={{ position: [-4, 8, 0], fov: 60 }}>
-      <Object3d />
-      <ambientLight intensity={0.5} />
-      <Environment preset="forest" />
+    <Canvas shadows camera={{ position: [0, 0, -5], fov: 60 }}>
+      <Rubik />
+      <ambientLight intensity={3} />
+      <Environment preset="studio" />
       {/* <Ground /> */}
-      <directionalLight position={[0, 0, 5]} color="red" />
+      <directionalLight position={[3, 5, -2]} intensity={1.2} color="white" />
       {/* <CameraControls makeDefault /> */}
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        minDistance={4}
+        maxDistance={12}
+      />
     </Canvas>
-  );
-};
-
-const Object3d = () => {
-  const mesh = useRef(unknown);
-
-  useFrame((state, delta) => {
-    mesh.current.rotation.x = mesh.current.rotation.y += delta;
-  });
-
-  return (
-    <mesh ref={mesh} position={[0, 0, 0]}>
-      <boxGeometry args={[4, 4, 4]} />
-      <meshStandardMaterial color="white" />
-    </mesh>
   );
 };
 
@@ -128,10 +131,10 @@ function Ground() {
   const gridConfig = {
     cellSize: 0.5,
     cellThickness: 0.5,
-    cellColor: "#6f6f6f",
+    cellColor: "#ffffff",
     sectionSize: 3,
     sectionThickness: 1,
-    sectionColor: "#9d4b4b",
+    sectionColor: "#ffffff",
     fadeDistance: 30,
     fadeStrength: 1,
     followCamera: false,
