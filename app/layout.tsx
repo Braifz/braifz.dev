@@ -35,7 +35,7 @@ export default function RootLayout({
         className={` ${inter.variable} antialiased container mx-auto 
     relative
     min-h-screen
-    bg-[radial-gradient(800px_600px_at_70%_40%,rgba(255,255,255,0.06),#0b0b0b)]
+    bg-[radial-gradient(800px_600px_at_70%_40%,rgba(0,255,0,0.04),#000000)]
   `}
       >
         <ThemeProvider>{children}</ThemeProvider>
