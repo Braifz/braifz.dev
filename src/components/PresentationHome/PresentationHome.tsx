@@ -35,7 +35,7 @@ const PresentationHome = () => {
             Braifz
           </span>
         </h4>
-        <h2 className="text-6xl lg:text-8xl font-bold italic lg:pb-3">
+        <h2 className="text-6xl lg:text-8xl font-bold italic lg:pb-3 text-white">
           <span className="split">Frontend Developer </span>
         </h2>
       </div>
