@@ -50,7 +50,7 @@ export default function BlogPage() {
       </div>
 
       <div className="flex gap-2 mt-6 mb-6 border-b-2 pb-3">
-        <h1 className="text-3xl lg:text-8xl font-bold ">Blog</h1>
+        <h1 className="text-3xl lg:text-8xl font-bold italic">Blog</h1>
         <p className="text-sm text-muted-foreground">(12)</p>
       </div>
 
@@ -164,8 +164,8 @@ export default function BlogPage() {
       </div>
 
       <div className="mt-16">
-        <h2 className="text-4xl font-bold border-b border-white pb-4 text-muted-foreground text-end">
-          Todos los Articulos
+        <h2 className="text-4xl font-bold border-b border-foreground pb-4 text-muted-foreground text-end italic">
+          ↘ Todos los Articulos ↘
         </h2>
         <Table>
           <TableHeader>
