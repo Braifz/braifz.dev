@@ -31,7 +31,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={` ${inter.variable} antialiased container mx-auto`}>
+      <body
+        className={` ${inter.variable} antialiased container mx-auto 
+    relative
+    min-h-screen
+      bg-[#000000]
+  `}
+      >
         <ThemeProvider>{children}</ThemeProvider>
         {/* <SplashCursor /> */}
       </body>
