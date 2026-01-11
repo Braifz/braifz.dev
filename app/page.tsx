@@ -1,51 +1,32 @@
-import Image from "next/image";
-import Link from "next/link";
+import CubeVideo from "@/src/components/CubeVideo/CubeVideo";
+import Header from "@/src/components/Header/Header";
+import PresentationHome from "@/src/components/PresentationHome/PresentationHome";
+import Scene from "@/src/components/Scene/Scene";
+
+export const metadata = {
+  title: "Braifz",
+  description: "Frontend Developer - Braifz",
+  keywords: ["Braifz", "Frontend Developer", "React", "Next.js", "Three.js"],
+};
 
 export default function Home() {
   return (
-    <div className="flex justify-center items-center h-dvh">
-      <div className="vertical items-center space-y-1">
-        <h2 className="text-center text-xl font-bold">Braifz</h2>
-        <p className="text-xs opacity-50 text-center">Under Construction</p>
+    <main>
+      <Header />
 
+      <CubeVideo />
 
-        <div className="flex space-x-2 pt-4">
-          <Link
-            href="https://linkedin.com/in/braifz"
-            target="_blank"
-            className="bg-white rounded-full p-2 hover:scale-110 transition-all"
-          >
-            <Image
-              src="/logos/linkedin.svg"
-              alt="LinkedIn"
-              width={16}
-              height={16}
-              className="cursor-pointer "
-            />
-          </Link>
-          <Link
-            href="https://github.com/braifz"
-            target="_blank"
-            className="bg-white rounded-full p-2 hover:scale-110 transition-all"
-          >
-            <Image
-              src="/logos/github.svg"
-              alt="GitHub"
-              width={16}
-              height={16}
-            />
-          </Link>
-          <Link
-            href="https://x.com/braifz"
-            target="_blank"
-            className="bg-white rounded-full p-2 hover:scale-110 transition-all"
-          >
-            <Image src="/logos/x.svg" alt="X" width={16} height={16} />
-          </Link>
+      <div className="flex flex-col lg:flex-row pt-14">
+        {/* Presentation Section  */}
+        <div className="lg:w-1/2 flex flex-col justify-center lg:pl-14">
+          <PresentationHome />
+        </div>
+
+        {/* Three js section - 3D element  */}
+        <div className="hidden lg:block lg:w-1/2 ">
+          <Scene />
         </div>
       </div>
-    
-    </div>
-    
+    </main>
   );
 }
