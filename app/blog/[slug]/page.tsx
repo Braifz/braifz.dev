@@ -1,10 +1,3 @@
-import { Blog, JsonLd, WithContext } from "@/src/utils/seo/json-ld";
-import { allBlogs } from "content-collections";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { Mdx } from "mdx-components";
-import Link from "next/link";
-import { ViewTransition } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,7 +5,14 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/src/components/ui/breadcrum";
-import { ChevronLeft, SlashIcon } from "lucide-react";
+import { Blog, JsonLd, WithContext } from "@/src/utils/seo/json-ld";
+import { allBlogs } from "content-collections";
+import { SlashIcon } from "lucide-react";
+import { Mdx } from "mdx-components";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 
 interface PostPageProps {
   params: Promise<{
@@ -64,23 +64,17 @@ export default async function Post(props: PostPageProps) {
     .filter((post) => post._meta.path !== params.slug)
     .slice(0, 3);
 
-  console.log(post);
-
   if (!post) {
     return notFound();
   }
 
   const MdxContent = post.mdx;
 
-  console.log(post);
-
   const jsonLd: WithContext<Blog> = {
     "@type": "Blog",
     "@context": "https://schema.org",
     author: "Braifz",
   };
-
-  // console.log(post.mdxContent.toString())
 
   return (
     <article className="mt-4">

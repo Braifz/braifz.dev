@@ -24,10 +24,6 @@ import { ViewTransition } from "react";
 export default function BlogPage() {
   const principalPost = allBlogs.find((post) => post.principal);
 
-  console.log(allBlogs);
-
-  console.log(principalPost);
-
   return (
     <main className="p-4">
       {/* // TODO: Move this component to another place and make it reusable */}
