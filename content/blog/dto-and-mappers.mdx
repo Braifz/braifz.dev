@@ -1,0 +1,78 @@
+---
+title: "DTOs y Mappers"
+summary: "Hoy escribiré un poco sobre qué son DTOs y Mappers con un ejemplo de cómo utilizarlos en conjunto con Typescript."
+date: Jun 29, 2024
+author: "Braifz"
+image: "/blog/blog-1.jpg"
+category: "Basic Concept"
+---
+
+Hoy escribiré un poco sobre qué son _DTOs_ y _Mappers_ con un ejemplo de cómo utilizarlos en conjunto con Typescript.
+
+---
+
+### ¿Qué es un DTO?
+
+Las siglas significan Data Transfer Object, un _DTO_ puede ser un modelo o una clase que se utilizan comúnmente para transformar o "filtrar" las propiedades de un objeto para que la información se adapte o concuerde con lo que espera recibir en alguna otra capa de la aplicación.
+
+### ¿Qué es un Mapper?
+
+Un _Mapper_ es una función o una clase que es la encargada de hacer la transformación de la información en base al _DTO_ proporcionado, un _Mapper_ toma un objeto de una fuente (como información de una base de datos) y lo convierte en un objeto que sigue la estructura del _DTO_.
+
+---
+
+Si no quedó del todo claro, estoy seguro que esto tendrá más sentido con un ejemplo...
+
+Imaginemos que tenemos un frontend que se comunica con una base de datos por medio de una api, desde el frontend queremos pedir un user y la api que estamos llamando tiene los siguientes campos:
+
+```typescript
+{
+  "id": 123,
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "country": "United States",
+  "age": 30,
+  "height": 175,
+  "gender": "male"
+}
+```
+
+De todos esos campos en nuestro frontend solo necesitamos los campos id, username, email... Acá es donde entra en juego el _DTO_
+
+```typescript
+interface userDTO {
+  id: number;
+  username: string;
+  email: string;
+}
+```
+
+Esta interface que creamos es nuestro _DTO_ y sirve para "filtrar" la información que necesitamos en el frontend.
+
+```typescript
+// interfaz creada anteriormente
+interface userDTO {
+  id: number;
+  username: string;
+  email: string;
+}
+
+// recibe user de la api
+const mapperUserToDTO = (userFromApi: UserData): userDTO => {
+  return {
+    id: userFromApi.id,
+    username: userFromApi.username,
+    email: userFromApi.email,
+  };
+};
+```
+
+El _Mapper_ en este caso es una función que recibe la información de la api, usando nuestra interfaz _DTO_ convierte la información y ya estaría lista para usarse en el frontend.
+
+### Beneficios de usar DTOs y Mappers
+
+- Los _DTOs_ y los _Mappers_ ayudan a mantener una separación entre las diferentes capas de tu aplicación.
+- Los _DTOs_ permiten seleccionar solo los campos relevantes para la transferencia.
+- Los _Mappers_ transforman los datos según las necesidades específicas de cada capa.
+
+En conclusión, los _DTOs_ y los _Mappers_ son herramientas para mantener una comunicación eficiente, estructurar datos y garantizar la coherencia en tu aplicación.
