@@ -3,16 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import { Button } from "../../ui/button";
+import { ExternalLink } from "lucide-react";
 
 const PrincipalPostBlog = () => {
   const principalPost = allBlogs.find((post) => post.principal);
 
   return (
-    <div className="lg:w-2/3 mt-10 lg:border-r-2 lg:pr-14">
+    <div className="lg:w-full lg:mt-6 mt-4 lg:pr-14 border border-foreground/20 p-6 lg:p-6 rounded-md">
       {principalPost && (
         <Link
           href={`/blog/${principalPost.slug}`}
-          className="w-56 cursor-default space-y-3"
+          className="w-56 cursor-default space-y-3 "
         >
           {/* <p className="text-secondary">{principalPost.category}</p> */}
           <ViewTransition
@@ -22,7 +23,7 @@ const PrincipalPostBlog = () => {
             exit="test2"
           >
             <h2
-              className="text-5xl font-bold border-b-2 pb-4"
+              className="lg:text-5xl text-4xl font-bold pb-4 text-start"
               key={principalPost.slug}
             >
               {principalPost.title}
@@ -49,7 +50,7 @@ const PrincipalPostBlog = () => {
               alt={principalPost.title}
               width={720}
               height={305}
-              className="w-full h-[350px] transition-colors bg-muted border-none object-cover rounded-xs"
+              className="w-full lg:h-[350px] h-[200px] transition-colors bg-muted border-none object-cover rounded-xs"
               priority
             />
           </ViewTransition>
@@ -58,9 +59,10 @@ const PrincipalPostBlog = () => {
           <Button
             // href={`/blog/${principalPost.slug}`}
             variant={"link"}
-            className="cursor-pointer rounded-none pl-0 "
+            className="cursor-pointer rounded-none p-0!"
           >
             Leer el articulo completo
+            <ExternalLink className="text-foreground pt-1" size={8} />
           </Button>
         </Link>
       )}

@@ -2,6 +2,7 @@ import AllArticlesSection from "@/src/components/Blog/AllArticlesSection/AllArti
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import PresentationBlog from "@/src/components/Blog/PresentationBlog/PresentationBlog";
 import PrincipalPostBlog from "@/src/components/Blog/PrincipalPostBlog/PrincipalPostBlog";
+import SocialMediaLinks from "@/src/components/SocialMediaLinks/SocialMediaLinks";
 
 export const metadata = {
   title: "Braifz - Blog",
@@ -34,20 +35,24 @@ export default function BlogPage() {
         />
       </div>
 
-      <div className="flex gap-2 mt-6 mb-6 border-b-2 pb-3">
+      <div className="flex gap-2 mt-6 lg:pb-3">
         <h1 className="text-3xl lg:text-8xl font-bold italic">Blog</h1>
-        <p className="text-sm text-muted-foreground">(12)</p>
+        <p className="text-sm text-muted-foreground">(5)</p>
       </div>
 
-      <div className="lg:flex flex-col lg:gap-6 mb-10">
-        <PrincipalPostBlog />
-
-        <div className="lg:w-1/3 lg:h-[600px] flex items-center flex-col justify-center">
+      <div className="flex flex-col lg:flex-row lg:gap-6 mb-10">
+        <div className="order-1 lg:order-2 w-full lg:w-1/3 mt-4 lg:mt-10 flex items-center flex-col justify-center">
           <PresentationBlog />
+        </div>
+
+        <div className="order-3 lg:order-1 lg:w-2/3 lg:mt-4 mt-2">
+          <PrincipalPostBlog />
         </div>
       </div>
 
       <AllArticlesSection />
+
+      <SocialMediaLinks className="mt-8" />
     </main>
   );
 }

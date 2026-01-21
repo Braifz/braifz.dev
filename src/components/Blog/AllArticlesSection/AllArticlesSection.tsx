@@ -5,40 +5,30 @@ import { Badge } from "../../ui/badge";
 const AllArticlesSection = () => {
   return (
     <div className="mt-16">
-      <h2 className="text-4xl font-bold border-b border-foreground pb-4 text-muted-foreground text-end italic">
+      <h2 className="lg:text-4xl text-2xl font-bold border-b mb-2 border-foreground/20 lg:pb-4 text-muted-foreground text-end italic">
         ↘ Todos los Articulos ↘
       </h2>
-      <div>
-        <div className="*:h-25">
-          {allBlogs.map((post) => (
-            <div key={post.slug}>
-              <div className="font-bold text-2xl">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="block w-full h-full"
-                >
-                  {post.title}
-                </Link>
-              </div>
-              <div>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="block w-full h-full"
-                >
-                  <Badge variant="outline">{post.category}</Badge>
-                </Link>
-              </div>
+
+      <div className="*:h-25">
+        {allBlogs.map((post) => (
+          <Link
+            href={`/blog/${post.slug}`}
+            key={post.slug}
+            className="border-b border-foreground/20 flex flex-col justify-between py-2"
+          >
+            <div className="font-bold lg:text-2xl text-lg block w-full h-full">
+              {post.title}
+            </div>
+
+            <div className="flex justify-between items-center">
+              <Badge variant="outline">{post.category}</Badge>
+
               <div className="text-muted-foreground font-semibold">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="block w-full h-full"
-                >
-                  {post.date}
-                </Link>
+                {post.date}
               </div>
             </div>
-          ))}
-        </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
