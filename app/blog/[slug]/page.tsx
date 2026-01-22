@@ -120,8 +120,9 @@ export default async function Post(props: PostPageProps) {
             <Image
               src={post.image}
               alt={post.title}
-              width={720}
+              width={740}
               height={405}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
               className="my-8 w-full h-[400px] transition-colors bg-muted border-none object-cover"
               priority
             />
