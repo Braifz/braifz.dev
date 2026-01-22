@@ -3,6 +3,10 @@ import Link from "next/link";
 import { Badge } from "../../ui/badge";
 
 const AllArticlesSection = () => {
+  const sortedBlogs = [...allBlogs].sort((a, b) => {
+    return a.order - b.order;
+  });
+
   return (
     <div className="mt-16">
       <h2 className="lg:text-4xl text-2xl font-bold border-b mb-2 lg:pb-4 text-end italic">
@@ -10,7 +14,7 @@ const AllArticlesSection = () => {
       </h2>
 
       <div className="*:h-25">
-        {allBlogs.map((post) => (
+        {sortedBlogs.map((post) => (
           <Link
             href={`/blog/${post.slug}`}
             key={post.slug}
