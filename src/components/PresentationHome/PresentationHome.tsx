@@ -28,7 +28,7 @@ const PresentationHome = () => {
   }, []);
 
   return (
-    <div className="mt-44 lg:mt-0 text-center lg:text-left mb-10">
+    <div className="mt-10 lg:mt-0 text-center lg:text-left mb-10">
       <div>
         <h4 className="hidden lg:block text-2xl font-bold pl-1 pb-2 text-muted-foreground">
           <span className="text-opacity" aria-label="Braifz">

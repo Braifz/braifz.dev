@@ -9,8 +9,8 @@ const PresentationBlog = () => {
       {/* <p className="text-2xl font-bold">Soy Braifz</p> */}
       <p className="lg:text-lg text-base">
         ¡Bienvenido/a a mi blog! Escribo para pensar mejor. Sobre tecnología,
-        ideas y cosas que me atraviesan. Escribo primero para mí. Si a alguien
-        más le sirve, mejor. Intentar, fallar y seguir aprendiendo.
+        ideas y cosas que estoy aprendiendo. Escribo primero para mí. Si a
+        alguien más le sirve, mejor. Intentar, fallar y seguir aprendiendo.
       </p>
 
       <div className="hidden lg:flex space-x-10 pt-4 justify-center mt-4">

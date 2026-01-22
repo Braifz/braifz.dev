@@ -85,11 +85,15 @@ export default async function Post(props: PostPageProps) {
         <ThemeToggle />
       </div>
 
-      <Link href="/blog" className="lg:hidden">
-        <Button variant="outline" size="icon" className="m-4">
-          <Undo2 />
-        </Button>
-      </Link>
+      <div className="lg:hidden flex items-center justify-between p-4">
+        <Link href="/blog">
+          <Button variant="ghost" size="icon">
+            <Undo2 />
+          </Button>
+        </Link>
+
+        <ThemeToggle />
+      </div>
 
       <JsonLd code={jsonLd} />
 
