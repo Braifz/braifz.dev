@@ -35,7 +35,7 @@ const PresentationHome = () => {
             Braifz
           </span>
         </h4>
-        <h2 className="text-6xl lg:text-8xl font-bold italic lg:pb-3 text-white">
+        <h2 className="text-6xl lg:text-8xl font-bold italic lg:pb-3">
           <span className="split">Frontend Developer </span>
         </h2>
       </div>
@@ -53,7 +53,7 @@ const PresentationHome = () => {
         <Link
           href="https://linkedin.com/in/braifz"
           target="_blank"
-          className="bg-white w-10 h-10 rounded-full lg:p-2 hover:scale-110 transition-all flex items-center justify-center"
+          className="bg-white border w-10 h-10 rounded-full lg:p-2 hover:scale-110 transition-all flex items-center justify-center"
         >
           <Image
             src="/logos/linkedin.svg"
@@ -66,14 +66,14 @@ const PresentationHome = () => {
         <Link
           href="https://github.com/braifz"
           target="_blank"
-          className="bg-white w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
+          className="bg-white border w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
         >
           <Image src="/logos/github.svg" alt="GitHub" width={16} height={16} />
         </Link>
         <Link
           href="https://x.com/braifz"
           target="_blank"
-          className="bg-white w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
+          className="bg-white border w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
         >
           <Image src="/logos/x.svg" alt="X" width={16} height={16} />
         </Link>

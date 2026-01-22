@@ -3,6 +3,7 @@ import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import PresentationBlog from "@/src/components/Blog/PresentationBlog/PresentationBlog";
 import PrincipalPostBlog from "@/src/components/Blog/PrincipalPostBlog/PrincipalPostBlog";
 import SocialMediaLinks from "@/src/components/SocialMediaLinks/SocialMediaLinks";
+import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 
 export const metadata = {
   title: "Braifz - Blog",
@@ -20,7 +21,7 @@ export const metadata = {
 export default function BlogPage() {
   return (
     <main className="p-4">
-      <div className="h-10 flex items-center">
+      <div className="h-10 flex items-center justify-between">
         <BreadcrumbBlog
           breadCrums={[
             {
@@ -33,6 +34,8 @@ export default function BlogPage() {
             },
           ]}
         />
+
+        <ThemeToggle />
       </div>
 
       <div className="flex gap-2 mt-6 lg:pb-3">

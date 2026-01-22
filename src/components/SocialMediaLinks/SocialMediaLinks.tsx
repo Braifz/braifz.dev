@@ -8,7 +8,7 @@ const SocialMediaLinks = ({ className }: { className?: string }) => {
       <Link
         href="https://linkedin.com/in/braifz"
         target="_blank"
-        className="bg-white rounded-full p-2 hover:scale-110 transition-all"
+        className="bg-white border rounded-full p-2 hover:scale-110 transition-all"
       >
         <Image
           src="/logos/linkedin.svg"
@@ -21,14 +21,14 @@ const SocialMediaLinks = ({ className }: { className?: string }) => {
       <Link
         href="https://github.com/braifz"
         target="_blank"
-        className="bg-white rounded-full p-2 hover:scale-110 transition-all"
+        className="bg-white border rounded-full p-2 hover:scale-110 transition-all"
       >
         <Image src="/logos/github.svg" alt="GitHub" width={16} height={16} />
       </Link>
       <Link
         href="https://x.com/braifz"
         target="_blank"
-        className="bg-white rounded-full p-2 hover:scale-110 transition-all"
+        className="bg-white border rounded-full p-2 hover:scale-110 transition-all"
       >
         <Image src="/logos/x.svg" alt="X" width={16} height={16} />
       </Link>

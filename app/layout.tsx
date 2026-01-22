@@ -35,8 +35,8 @@ export default function RootLayout({
         className={` ${inter.variable} antialiased container mx-auto 
     relative
     min-h-screen
-      bg-[#000000]
-  `}
+    bg-background
+    `}
       >
         <ThemeProvider>{children}</ThemeProvider>
         {/* <SplashCursor /> */}

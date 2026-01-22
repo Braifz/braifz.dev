@@ -1,5 +1,6 @@
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import MoreArticleSection from "@/src/components/Blog/MoreArticleSection/MoreArticleSection";
+import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 import { Button } from "@/src/components/ui/button";
 import { Blog, JsonLd, WithContext } from "@/src/utils/seo/json-ld";
 import { allBlogs } from "content-collections";
@@ -72,7 +73,7 @@ export default async function Post(props: PostPageProps) {
 
   return (
     <article className="lg:mt-4 ">
-      <div className="hidden lg:flex h-10 items-center">
+      <div className="hidden lg:flex h-10 items-center justify-between">
         <BreadcrumbBlog
           breadCrums={[
             { href: "/", label: "Home" },
@@ -80,6 +81,8 @@ export default async function Post(props: PostPageProps) {
             { href: `/blog/${post.slug}`, label: post.title },
           ]}
         />
+
+        <ThemeToggle />
       </div>
 
       <Link href="/blog" className="lg:hidden">

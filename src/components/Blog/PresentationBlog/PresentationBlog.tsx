@@ -4,7 +4,7 @@ import SocialMediaLinks from "../../SocialMediaLinks/SocialMediaLinks";
 
 const PresentationBlog = () => {
   return (
-    <div className="lg:w-[400px] lg:p-4 p-6 border border-foreground/20 rounded-md h-full">
+    <div className="lg:w-[400px] lg:p-4 p-6 border rounded-md h-full">
       <p className="lg:text-2xl text-lg mb-4"> 👋 Hola </p>
       {/* <p className="text-2xl font-bold">Soy Braifz</p> */}
       <p className="lg:text-lg text-base">

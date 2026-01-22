@@ -9,7 +9,7 @@ const PrincipalPostBlog = () => {
   const principalPost = allBlogs.find((post) => post.principal);
 
   return (
-    <div className="lg:w-full lg:mt-6 mt-4 lg:pr-14 border border-foreground/20 p-6 lg:p-6 rounded-md">
+    <div className="lg:w-full lg:mt-6 mt-4 lg:pr-14 border p-6 lg:p-6 rounded-md">
       {principalPost && (
         <Link
           href={`/blog/${principalPost.slug}`}
