@@ -131,7 +131,7 @@ export default async function Post(props: PostPageProps) {
         </ViewTransition>
       )}
 
-      <div className="content lg:mx-64 md:mx-12 mx-5 mb-10">
+      <div className="content lg:mx-80 md:mx-12 mx-5 mb-10">
         <Mdx code={post.mdx} />
       </div>
 

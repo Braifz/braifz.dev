@@ -23,7 +23,7 @@ const components: MDXComponents = {
     <h1
       className={cn(
         "mt-2 text-4xl font-bold tracking-tight scroll-m-20",
-        className
+        className,
       )}
       {...props}
     />
@@ -32,7 +32,7 @@ const components: MDXComponents = {
     <h2
       className={cn(
         "pb-1 mt-10 text-3xl font-semibold tracking-tight border-b scroll-m-20 first:mt-0",
-        className
+        className,
       )}
       {...props}
     />
@@ -41,7 +41,7 @@ const components: MDXComponents = {
     <h3
       className={cn(
         "mt-8 text-2xl font-semibold tracking-tight scroll-m-20",
-        className
+        className,
       )}
       {...props}
     />
@@ -50,7 +50,7 @@ const components: MDXComponents = {
     <h4
       className={cn(
         "mt-8 text-xl font-semibold tracking-tight scroll-m-20",
-        className
+        className,
       )}
       {...props}
     />
@@ -59,7 +59,7 @@ const components: MDXComponents = {
     <h5
       className={cn(
         "mt-8 text-lg font-semibold tracking-tight scroll-m-20",
-        className
+        className,
       )}
       {...props}
     />
@@ -68,7 +68,7 @@ const components: MDXComponents = {
     <h6
       className={cn(
         "mt-8 text-base font-semibold tracking-tight scroll-m-20",
-        className
+        className,
       )}
       {...props}
     />
@@ -85,7 +85,7 @@ const components: MDXComponents = {
     <p
       className={cn(
         "leading-11 font-normal not-first:mt-6 text-lg tracking-wider",
-        className
+        className,
       )}
       {...props}
     />
@@ -103,7 +103,7 @@ const components: MDXComponents = {
     <blockquote
       className={cn(
         "mt-6 border-l-2 pl-6 italic *:text-muted-foreground",
-        className
+        className,
       )}
       {...props}
     />
@@ -132,7 +132,7 @@ const components: MDXComponents = {
     <th
       className={cn(
         "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
-        className
+        className,
       )}
       {...props}
     />
@@ -141,7 +141,7 @@ const components: MDXComponents = {
     <td
       className={cn(
         "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
-        className
+        className,
       )}
       {...props}
     />
@@ -160,7 +160,7 @@ const components: MDXComponents = {
     <code
       className={cn(
         "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
-        className
+        className,
       )}
       {...props}
     />
