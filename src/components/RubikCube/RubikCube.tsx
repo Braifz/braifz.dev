@@ -52,7 +52,7 @@ function Cube({
                 y: Math.random() * 30,
                 z: Math.random() * 30,
               },
-              true
+              true,
             );
           }}
         >
@@ -78,7 +78,7 @@ function Rubik() {
   });
 
   return (
-    <group ref={mesh}>
+    <group ref={mesh} position={[0, 0.2, 0]}>
       {[...Array(3).keys()].map((x) =>
         [...Array(3).keys()].map((y) =>
           [...Array(3).keys()].map((z) => (
@@ -87,8 +87,8 @@ function Rubik() {
               position={[x - 1, y - 1, z - 1]}
               isActive={randomBool()}
             />
-          ))
-        )
+          )),
+        ),
       )}
     </group>
   );

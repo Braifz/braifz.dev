@@ -15,6 +15,7 @@ const blogs = defineCollection({
     image: z.string(),
     principal: z.boolean().optional(),
     category: z.string(),
+    order: z.number(),
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document);

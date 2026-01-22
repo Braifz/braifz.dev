@@ -3,8 +3,9 @@ title: "Supabase - Edge Functions"
 summary: "This tutorial is about the Edge Function in Supabase, focusing on how it works with Next.js."
 date: Jun 29, 2024
 author: "Braifz"
-image: "/blog/blog-1.jpg"
+image: "/blog/supabase-edge-function/cover.jpg"
 category: "Supabase"
+order: 2
 ---
 
 required:
@@ -35,9 +36,9 @@ And they’ve defined the Edge Functions like this:
 
 These functions run custom logic on the edge, closer to where data is consumed. This reduces latency and improves performance for global apps.
 
-### What we gonna build?
+### What are we going to build?
 
-We gonna to build a next.js app with supabase, using a edge function to get data in an external api and save this data in supabase database.
+We are going to build a Next.js app with Supabase, using an Edge Function to fetch data from an external API and store it in the Supabase database.
 
 You can find the code of this tutorial in this [repo](https://github.com/Braifz/edge-function-supabase).
 
@@ -45,73 +46,73 @@ You can find the code of this tutorial in this [repo](https://github.com/Braifz/
 
 ### Creating a Next.js project
 
-The first thing we need to do is create a Next.js project, put this command in the console:
+The first thing we need to do is create a Next.js project. Run the following command in your terminal:
 
-```plaintext
+```shell
 npx create-next-app@latest
 ```
 
-This command will create a project of next.js, just follow the steps…
+This command will create a Next.js project. Just follow the steps…
 
 For more details, see [here](https://nextjs.org/docs/getting-started/installation).
 
 ### Installing Supabase CLI
 
-This command is for Window SO, if you have another OS check Supabase documentation [here](https://supabase.com/docs/guides/cli/getting-started?queryGroups=platform&platform=macos).
+This command is for Windows OS. If you are using another operating system, check the Supabase documentation [here](https://supabase.com/docs/guides/cli/getting-started?queryGroups=platform&platform=macos).
 
-```plaintext
+```shell
 scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
 scoop install supabase
 ```
 
 ### Starting Supabase
 
-Inside the folder of next.js created before, run this command:
+Inside the Next.js project folder created earlier, run this command:
 
-```plaintext
+```shell
 supabase init
 ```
 
-This will create a folder called supabase in the root of the project, within this folder will be all the related with Supabase
+This will create a folder called supabase at the root of the project. Inside this folder you will find everything related to Supabase.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719639720312/91d0b715-0ebe-464b-82ad-439a28ed5c81.webp align="center")
+![Supabase init](/blog/supabase-edge-function/supabase1.webp)
 
 ### Creating Edge Function
 
-Write the following command:
+Run the following command:
 
-```plaintext
+```shell
 supabase functions new [function-name]
 ```
 
-This will be create a folder called /functions and inside will be all the functions we create…
+This will create a /functions folder containing all the Edge Functions you create.
 
 I called the function _get-data-api_
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719639827944/b4091deb-d116-4b18-85d8-e6626096d721.webp align="center")
+![](/blog/supabase-edge-function/supabase2.webp)
 
-In the archive index.ts is where the logic of the edge function will be, this logic will deploy in supabase or locally if you want…
+In the index.ts file is where the Edge Function logic lives. This logic can be deployed to Supabase or run locally.
 
-### Creating supabase project
+### Creating Supabase project
 
 Go to [https://supabase.com/dashboard](https://supabase.com/dashboard) and create a new project.  
 You will see something like this:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719640007710/99c930c4-da78-43a8-a4e4-048a5bef2908.webp align="center")
+![](/blog/supabase-edge-function/supabase3.webp)
 
-Fill the project name and password and create a new project.
+Fill in the project name and password, then create the project.
 
-### Enviroment variables
+### Environment variables
 
 Now we need to save the .env in our project, go to your project settings -&gt; API -&gt; API Settings
 
 You will look something like that:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719640067691/427dc1a3-6008-4827-a158-427fe48f60f3.webp align="center")
+![](/blog/supabase-edge-function/supabase4.webp)
 
-Create the archive .env in the root of your next.js project and copy this with yours keys:
+Create a .env file in the root of your Next.js project and add your keys:
 
-```plaintext
+```shell
 NEXT_PUBLIC_SUPABASE_URL=<API_URL>
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<ANON_KEY>
 ```
@@ -147,7 +148,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.42.0";
 Deno.serve(async () => {
   const supabaseClient = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
   );
   try {
     const data = await axiod.get("https://rickandmortyapi.com/api/character");
@@ -178,29 +179,29 @@ Deno.serve(async () => {
 
 ### Deploy Edge Function
 
-Here we want to send this function we write to supabase and run this with a http request.
+Now we want to deploy the Edge Function we wrote and trigger it via an HTTP request.
 
 Just write this in the command line:
 
-```plaintext
+```shell
 supabase login
 ```
 
 This will open your browser and login with your supabase profile
 
-Now write this command and select your project
+Then list your projects and select the correct one:
 
-```plaintext
+```shell
 supabase projects list
 ```
 
 You will see something like that
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719640432578/6a919c45-29de-43a1-9ac3-c150fedeb85b.webp align="center")
+![](/blog/supabase-edge-function/supabase5.webp)
 
 now we have the reference ID, we want to link this project for deploy our edge function, write:
 
-```plaintext
+```shell
 supabase link --project-ref <YOUR_REFERENCE_ID>
 ```
 
@@ -210,7 +211,7 @@ now just write in the command line:
 
 > _make sure you have Docker runnning_
 
-```plaintext
+```shell
 supabase functions deploy <EDGE_FUNCTION_NAME>
 ```
 
@@ -220,15 +221,15 @@ Go to Supabase dashboard and you should see your edge function deployed 🎉🎉
 
 If you go to Supabase dashboard you should see this table, make click and you can see the information about the edge function
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719640559173/ef3f4a7a-9d78-43aa-a27f-f1d457ba7029.webp align="center")
+![](/blog/supabase-edge-function/supabase6.webp)
 
 now copy the Endpoint URL
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719640577588/3662c5ff-9ff0-4694-8657-ffce76de7554.webp align="center")
+![](/blog/supabase-edge-function/supabase7.webp)
 
 Now make a request Http in this case I am using [**postman**](https://www.postman.com/), make sure you’re putting the bearer token correctly.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719640613232/b8bef588-6911-489a-a7fd-67f58059d666.webp align="center")
+![](/blog/supabase-edge-function/supabase8.webp)
 
 If status code is 200, congratulations! 🎉
 
@@ -236,7 +237,7 @@ We are calling our edge function correctly, now go to Supabase dashboard!
 
 you should see the table populated with the api data 🎉
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1719640632560/ee6a448e-b18d-4db1-8807-424c03240acd.webp align="center")
+![](/blog/supabase-edge-function/supabase9.webp)
 
 ### Conclusion
 
