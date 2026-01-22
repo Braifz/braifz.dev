@@ -54,7 +54,7 @@ const PrincipalPostBlog = () => {
               priority
             />
           </ViewTransition>
-          <p className="text-lg line-clamp-3">{principalPost.summary}</p>
+          <p className=" line-clamp-3">{principalPost.summary}</p>
 
           <Button
             // href={`/blog/${principalPost.slug}`}
