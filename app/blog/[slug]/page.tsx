@@ -1,4 +1,5 @@
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
+import GoToTopButton from "@/src/components/Blog/GoToTopButtton/GoToTopButton";
 import MoreArticleSection from "@/src/components/Blog/MoreArticleSection/MoreArticleSection";
 import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 import { Button } from "@/src/components/ui/button";
@@ -130,13 +131,17 @@ export default async function Post(props: PostPageProps) {
         </ViewTransition>
       )}
 
-      <div className="content lg:mx-64 md:mx-12 mx-5">
+      <div className="content lg:mx-64 md:mx-12 mx-5 mb-10">
         <Mdx code={post.mdx} />
       </div>
 
-      <footer className="mt-16 mb-5 hidden lg:block">
-        <h2 className="text-lg font-semibold text-muted-foreground text-center mb-5 uppercase tracking-wider">
-          More Articles
+      <div className="w-full flex justify-center my-6">
+        <GoToTopButton />
+      </div>
+
+      <footer className="mt-16 mb-5 border-t">
+        <h2 className="text-lg font-semibold italic border-b text-center p-4 mb-5 tracking-wider">
+          Más Artículos
         </h2>
 
         <MoreArticleSection relatedPosts={relatedPosts} />
