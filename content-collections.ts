@@ -2,6 +2,9 @@ import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
 import { compileMDX } from "@content-collections/mdx";
 import readingTime from "reading-time";
+import { getTableOfContents } from "fumadocs-core/content/toc";
+import slugify from "slugify";
+// import remarkSlug from "remark-slug";
 
 const blogs = defineCollection({
   name: "blog",
@@ -16,9 +19,24 @@ const blogs = defineCollection({
     principal: z.boolean().optional(),
     category: z.string(),
     order: z.number(),
+    toc: z.any().optional(),
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document);
+
+    const toc = await getTableOfContents(document.content);
+
+    const serializedToc = toc.map((item: any) => ({
+      id: slugify(item.title, {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      }),
+      title: item.title,
+      depth: item.depth,
+    }));
+
+    console.log(serializedToc);
 
     const slug = document._meta.path;
 
@@ -27,6 +45,7 @@ const blogs = defineCollection({
       readingTime: readingTime(document.content).text,
       mdx,
       slug,
+      toc: serializedToc,
     };
   },
 });

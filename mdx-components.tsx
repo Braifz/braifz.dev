@@ -3,6 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import { cn } from "./src/lib/utils";
 import type { BundledLanguage } from "shiki";
 import { codeToHtml } from "shiki";
+import slugify from "slugify";
 
 interface Props {
   children: string;
@@ -21,6 +22,11 @@ export async function CodeBlock(props: Props) {
 const components: MDXComponents = {
   h1: ({ className, ...props }) => (
     <h1
+      id={slugify(props.children as string, {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      })}
       className={cn(
         "mt-2 text-4xl font-bold tracking-tight scroll-m-20",
         className,
@@ -30,6 +36,11 @@ const components: MDXComponents = {
   ),
   h2: ({ className, ...props }) => (
     <h2
+      id={slugify(props.children as string, {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      })}
       className={cn(
         "pb-1 mt-10 text-3xl font-semibold tracking-tight border-b scroll-m-20 first:mt-0",
         className,
@@ -39,6 +50,11 @@ const components: MDXComponents = {
   ),
   h3: ({ className, ...props }) => (
     <h3
+      id={slugify(props.children as string, {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      })}
       className={cn(
         "mt-8 text-2xl font-semibold tracking-tight scroll-m-20",
         className,
