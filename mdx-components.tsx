@@ -3,6 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import { cn } from "./src/lib/utils";
 import type { BundledLanguage } from "shiki";
 import { codeToHtml } from "shiki";
+import slugify from "slugify";
 
 interface Props {
   children: string;
@@ -14,13 +15,22 @@ export async function CodeBlock(props: Props) {
     lang: props.lang,
     theme: "night-owl",
   });
-
-  return <div dangerouslySetInnerHTML={{ __html: out }} />;
+  return (
+    <div
+      className="overflow-x-auto rounded-lg max-w-full"
+      dangerouslySetInnerHTML={{ __html: out }}
+    />
+  );
 }
 
 const components: MDXComponents = {
   h1: ({ className, ...props }) => (
     <h1
+      id={slugify(props.children as string, {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      })}
       className={cn(
         "mt-2 text-4xl font-bold tracking-tight scroll-m-20",
         className,
@@ -30,6 +40,11 @@ const components: MDXComponents = {
   ),
   h2: ({ className, ...props }) => (
     <h2
+      id={slugify(props.children as string, {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      })}
       className={cn(
         "pb-1 mt-10 text-3xl font-semibold tracking-tight border-b scroll-m-20 first:mt-0",
         className,
@@ -39,6 +54,11 @@ const components: MDXComponents = {
   ),
   h3: ({ className, ...props }) => (
     <h3
+      id={slugify(props.children as string, {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      })}
       className={cn(
         "mt-8 text-2xl font-semibold tracking-tight scroll-m-20",
         className,
@@ -83,10 +103,7 @@ const components: MDXComponents = {
   ),
   p: ({ className, ...props }) => (
     <p
-      className={cn(
-        "leading-11 font-normal not-first:mt-6 text-lg tracking-wider",
-        className,
-      )}
+      className={cn("leading-7  not-first:mt-6 tracking-wider", className)}
       {...props}
     />
   ),
@@ -102,7 +119,7 @@ const components: MDXComponents = {
   blockquote: ({ className, ...props }) => (
     <blockquote
       className={cn(
-        "mt-6 border-l-2 pl-6 italic *:text-muted-foreground",
+        "mt-6 border-l-2 pl-6 text-xl italic border-primary/30 font-bold font-serif",
         className,
       )}
       {...props}

@@ -1,6 +1,8 @@
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import GoToTopButton from "@/src/components/Blog/GoToTopButtton/GoToTopButton";
 import MoreArticleSection from "@/src/components/Blog/MoreArticleSection/MoreArticleSection";
+import ProgressBar from "@/src/components/Blog/ProgressBar/ProgressBar";
+import TableOfContent from "@/src/components/Blog/TableOfContent/TableOfContent";
 import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 import { Button } from "@/src/components/ui/button";
 import { Blog, JsonLd, WithContext } from "@/src/utils/seo/json-ld";
@@ -74,6 +76,9 @@ export default async function Post(props: PostPageProps) {
 
   return (
     <article className="lg:mt-4 ">
+      <ProgressBar />
+
+      {/* HEADER */}
       <div className="hidden lg:flex h-10 items-center justify-between">
         <BreadcrumbBlog
           breadCrums={[
@@ -131,11 +136,17 @@ export default async function Post(props: PostPageProps) {
         </ViewTransition>
       )}
 
-      <div className="content lg:mx-80 md:mx-12 mx-5 mb-10">
-        <Mdx code={post.mdx} />
+      <div className="flex w-full justify-center">
+        {/* Article Content */}
+        <div className="content lg:mx-32 lg:mb-10 px-5 lg:w-2/3 lg:mt-10 w-full">
+          <Mdx code={post.mdx} />
+        </div>
+
+        {/* Table of Contents */}
+        <TableOfContent post={post} />
       </div>
 
-      <div className="w-full flex justify-center my-6">
+      <div className="w-full flex justify-center my-6 mt-20">
         <GoToTopButton />
       </div>
 

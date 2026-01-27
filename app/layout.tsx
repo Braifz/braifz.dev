@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import WelcomeConsole from "@/src/components/WelcomeConsole/WelcomeConsole";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -38,6 +39,8 @@ export default function RootLayout({
     bg-background
     `}
       >
+        <WelcomeConsole />
+
         <ThemeProvider>{children}</ThemeProvider>
         {/* <SplashCursor /> */}
       </body>
