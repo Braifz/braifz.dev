@@ -15,8 +15,12 @@ export async function CodeBlock(props: Props) {
     lang: props.lang,
     theme: "night-owl",
   });
-
-  return <div dangerouslySetInnerHTML={{ __html: out }} />;
+  return (
+    <div
+      className="overflow-x-auto rounded-lg max-w-full"
+      dangerouslySetInnerHTML={{ __html: out }}
+    />
+  );
 }
 
 const components: MDXComponents = {

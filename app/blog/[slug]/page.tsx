@@ -135,7 +135,7 @@ export default async function Post(props: PostPageProps) {
 
       <div className="flex w-full justify-center">
         {/* Article Content */}
-        <div className="content lg:mx-32 lg:mb-10 mx-5 lg:w-2/3 lg:mt-10">
+        <div className="content lg:mx-32 lg:mb-10 px-5 lg:w-2/3 lg:mt-10 w-full">
           <Mdx code={post.mdx} />
         </div>
 
