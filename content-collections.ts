@@ -36,8 +36,6 @@ const blogs = defineCollection({
       depth: item.depth,
     }));
 
-    console.log(serializedToc);
-
     const slug = document._meta.path;
 
     return {

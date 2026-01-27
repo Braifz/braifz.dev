@@ -99,10 +99,7 @@ const components: MDXComponents = {
   ),
   p: ({ className, ...props }) => (
     <p
-      className={cn(
-        "leading-11 font-normal not-first:mt-6 text-lg tracking-wider",
-        className,
-      )}
+      className={cn("leading-7  not-first:mt-6 tracking-wider", className)}
       {...props}
     />
   ),
@@ -118,7 +115,7 @@ const components: MDXComponents = {
   blockquote: ({ className, ...props }) => (
     <blockquote
       className={cn(
-        "mt-6 border-l-2 pl-6 italic *:text-muted-foreground",
+        "mt-6 border-l-2 pl-6 text-xl italic border-primary/30 font-bold font-serif",
         className,
       )}
       {...props}

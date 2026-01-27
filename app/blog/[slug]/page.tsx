@@ -1,6 +1,7 @@
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import GoToTopButton from "@/src/components/Blog/GoToTopButtton/GoToTopButton";
 import MoreArticleSection from "@/src/components/Blog/MoreArticleSection/MoreArticleSection";
+import TableOfContent from "@/src/components/Blog/TableOfContent/TableOfContent";
 import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 import { Button } from "@/src/components/ui/button";
 import { Blog, JsonLd, WithContext } from "@/src/utils/seo/json-ld";
@@ -66,8 +67,6 @@ export default async function Post(props: PostPageProps) {
     return notFound();
   }
 
-  console.log(post);
-
   const jsonLd: WithContext<Blog> = {
     "@type": "Blog",
     "@context": "https://schema.org",
@@ -76,6 +75,7 @@ export default async function Post(props: PostPageProps) {
 
   return (
     <article className="lg:mt-4 ">
+      {/* HEADER */}
       <div className="hidden lg:flex h-10 items-center justify-between">
         <BreadcrumbBlog
           breadCrums={[
@@ -133,36 +133,18 @@ export default async function Post(props: PostPageProps) {
         </ViewTransition>
       )}
 
-      <div className="flex w-full">
-        {/* Tabla de contenidos */}
-        <aside className="w-1/3 hidden lg:block">
-          <div className="sticky top-10 p-4">
-            <h3 className="font-semibold text-lg mb-4">Tabla de Contenido</h3>
-            <nav className="space-y-2 border-l-2 border-primary">
-              {post.toc.map((item) => (
-                <div
-                  key={item.id}
-                  style={{ marginLeft: `${(item.depth - 1) * 16}px` }}
-                >
-                  <a
-                    href={`#${item.id}`}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {item.title}
-                  </a>
-                </div>
-              ))}
-            </nav>
-          </div>
-        </aside>
-        {/* Contenido del artículo */}
-
-        <div className="content lg:mx-40 md:mx-12 mx-5 mb-10 w-2/3">
+      <div className="flex w-full justify-center">
+        {/* Article Content */}
+        <div className="content lg:mx-32 lg:mb-10 mx-5 lg:w-2/3 lg:mt-10">
           <Mdx code={post.mdx} />
-          <div className="w-full flex justify-center my-6 mt-20">
-            <GoToTopButton />
-          </div>
         </div>
+
+        {/* Table of Contents */}
+        <TableOfContent post={post} />
+      </div>
+
+      <div className="w-full flex justify-center my-6 mt-20">
+        <GoToTopButton />
       </div>
 
       <footer className="mt-16 mb-5 border-t">
