@@ -1,6 +1,7 @@
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import GoToTopButton from "@/src/components/Blog/GoToTopButtton/GoToTopButton";
 import MoreArticleSection from "@/src/components/Blog/MoreArticleSection/MoreArticleSection";
+import ProgressBar from "@/src/components/Blog/ProgressBar/ProgressBar";
 import TableOfContent from "@/src/components/Blog/TableOfContent/TableOfContent";
 import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 import { Button } from "@/src/components/ui/button";
@@ -75,6 +76,8 @@ export default async function Post(props: PostPageProps) {
 
   return (
     <article className="lg:mt-4 ">
+      <ProgressBar />
+
       {/* HEADER */}
       <div className="hidden lg:flex h-10 items-center justify-between">
         <BreadcrumbBlog
