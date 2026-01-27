@@ -8,24 +8,20 @@ const AllArticlesSection = () => {
   });
 
   return (
-    <div className="mt-16">
-      <h2 className="lg:text-4xl text-2xl font-bold border-b mb-2 lg:pb-4 text-end italic">
+    <div className="">
+      <h2 className="lg:text-2xl text-2xl font-bold border-b border-border lg:pb-2 lg:text-end ">
         ↘ Todos los Articulos ↘
       </h2>
 
-      <div className="*:h-25">
+      <div className="*:h-20">
         {sortedBlogs.map((post) => (
           <Link
             href={`/blog/${post.slug}`}
             key={post.slug}
-            className="border-b flex flex-col justify-between py-2"
+            className="border-b border-border flex flex-col justify-between"
           >
-            <div className="font-bold lg:text-2xl text-lg block w-full h-full">
-              {post.title}
-            </div>
-
-            <div className="flex justify-between items-center">
-              <Badge variant="outline">{post.category}</Badge>
+            <div className="flex justify-between items-center h-full">
+              <div className="font-bold lg:text-2xl text-lg">{post.title}</div>
 
               <div className="text-muted-foreground font-semibold">
                 {post.date}

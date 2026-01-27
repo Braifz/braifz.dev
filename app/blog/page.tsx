@@ -38,22 +38,20 @@ export default function BlogPage() {
         <ThemeToggle />
       </div>
 
-      <div className="flex gap-2 mt-6 lg:pb-3">
-        <h1 className="text-3xl lg:text-8xl font-bold italic">Blog</h1>
+      <div className="flex gap-2 lg:mt-16 mt-10">
+        <h1 className="text-5xl lg:text-8xl font-bold">Blog</h1>
         <p className="text-sm text-muted-foreground">(5)</p>
       </div>
 
-      <div className="flex flex-col lg:flex-row lg:gap-6 mb-10">
-        <div className="order-1 lg:order-2 w-full lg:w-1/3 mt-4 lg:mt-10 flex items-center flex-col justify-center">
+      <div className="flex flex-col lg:flex-row lg:gap-6 mb-10 mt-10">
+        <div className="w-full lg:w-1/3  flex  flex-col pl-1 ">
           <PresentationBlog />
         </div>
 
-        <div className="order-3 lg:order-1 lg:w-2/3 lg:mt-4 mt-2">
-          <PrincipalPostBlog />
+        <div className="lg:w-2/3 mt-10 lg:mt-0">
+          <AllArticlesSection />
         </div>
       </div>
-
-      <AllArticlesSection />
 
       <SocialMediaLinks className="mt-8" />
     </main>
