@@ -150,8 +150,8 @@ export default async function Post(props: PostPageProps) {
         <GoToTopButton />
       </div>
 
-      <footer className="mt-16 mb-5 border-t">
-        <h2 className="text-lg font-semibold italic border-b text-center p-4 mb-5 tracking-wider">
+      <footer className="mt-16 mb-5 border-t border-border">
+        <h2 className="text-lg font-semibold italic border-b border-border text-center p-4 mb-5 tracking-wider">
           Más Artículos
         </h2>
 
