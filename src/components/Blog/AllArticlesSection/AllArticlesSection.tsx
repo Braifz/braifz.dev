@@ -1,6 +1,5 @@
 import { allBlogs } from "@/.content-collections/generated";
-import Link from "next/link";
-import { Badge } from "../../ui/badge";
+import ArticleItem from "./ArticleItem";
 
 const AllArticlesSection = () => {
   const sortedBlogs = [...allBlogs].sort((a, b) => {
@@ -15,19 +14,7 @@ const AllArticlesSection = () => {
 
       <div className="*:h-20">
         {sortedBlogs.map((post) => (
-          <Link
-            href={`/blog/${post.slug}`}
-            key={post.slug}
-            className="border-b border-border flex flex-col justify-between"
-          >
-            <div className="flex justify-between items-center h-full">
-              <div className="font-bold lg:text-2xl text-lg">{post.title}</div>
-
-              <div className="text-muted-foreground font-semibold">
-                {post.date}
-              </div>
-            </div>
-          </Link>
+          <ArticleItem key={post.slug} post={post} />
         ))}
       </div>
     </div>
