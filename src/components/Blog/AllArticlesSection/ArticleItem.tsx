@@ -35,7 +35,6 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
     const handleMouseOver = () => {
       if (activeIndexRef.current === index) return;
 
-      // Limpiar elemento anterior si existe
       if (activeIndexRef.current !== -1 && activeClientImgWrapper) {
         const mouseoutEvent = new Event("mouseout");
         item.dispatchEvent(mouseoutEvent);
@@ -43,7 +42,6 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
 
       activeIndexRef.current = index;
 
-      // Crear wrapper para la imagen
       const clientImgWrapper = document.createElement("div");
       clientImgWrapper.className =
         "absolute inset-0 w-[40px] h-dvh top-0 overflow-hidden -z-10 ";
@@ -126,6 +124,7 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
       href={`/blog/${post.slug}`}
       className="border-b border-border flex flex-col justify-between px-5 hover:bg-[var(--hover-bg)] hover:text-[var(--hover-text)]  duration-200 transition-all"
       style={
+        // TODO: Improve this
         {
           "--hover-bg": "light-dark(#000000, #f3f4f6)",
           "--hover-text": "light-dark(#ffffff, #000000)",

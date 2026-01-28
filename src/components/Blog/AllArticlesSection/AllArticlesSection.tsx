@@ -1,4 +1,3 @@
-// AllArticlesSection.tsx mejorado
 "use client";
 
 import { allBlogs } from "@/.content-collections/generated";
@@ -34,8 +33,6 @@ const AllArticlesSection = () => {
           />
         ))}
       </div>
-
-      {/* Contenedor único para todas las imágenes de preview */}
     </div>
   );
 };
