@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import CustomEase from "gsap/dist/CustomEase";
+import { SplitText } from "@/src/lib/gsap";
 
 interface ArticleItemProps {
   post: Blog;
@@ -15,7 +16,9 @@ interface ArticleItemProps {
 
 const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
   const itemRef = useRef<HTMLAnchorElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const activeIndexRef = useRef<number>(-1);
+  const dateRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(CustomEase);
@@ -26,11 +29,15 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
 
     const item = itemRef.current;
     const preview = previewRef.current;
+    const title = titleRef.current;
+    const date = dateRef.current;
 
     if (!item || !preview) return;
 
     let activeClientImgWrapper: HTMLDivElement | null = null;
     let activeClientImg: HTMLImageElement | null = null;
+    let titleAnimation: gsap.core.Tween | null = null;
+    let dateAnimation: gsap.core.Tween | null = null;
 
     const handleMouseOver = () => {
       if (activeIndexRef.current === index) return;
@@ -41,6 +48,37 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
       }
 
       activeIndexRef.current = index;
+
+      if (title) {
+        const split = SplitText.create(title, { type: "lines" });
+        const splitDate = SplitText.create(date, { type: "lines" });
+
+        titleAnimation = gsap.from(split.lines, {
+          duration: 0.5,
+          y: 20,
+          opacity: 0,
+          stagger: 0.05,
+          ease: "power2.out",
+        });
+
+        dateAnimation = gsap.from(splitDate.lines, {
+          duration: 0.5,
+          y: 20,
+          opacity: 0,
+          stagger: 0.05,
+          ease: "power2.out",
+        });
+
+        // const spans = title.querySelectorAll("span");
+
+        // titleAnimation = gsap.from(spans, {
+        //   duration: 0.5,
+        //   y: 20,
+        //   opacity: 0,
+        //   stagger: 0.05,
+        //   ease: "power2.out",
+        // });
+      }
 
       const clientImgWrapper = document.createElement("div");
       clientImgWrapper.className =
@@ -86,6 +124,10 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
         return;
       }
 
+      if (titleAnimation) {
+        // titleAnimation.reverse();
+      }
+
       if (activeClientImg && activeClientImgWrapper) {
         const clientImgToRemove = activeClientImg;
         const clientImgWrapperToRemove = activeClientImgWrapper;
@@ -122,7 +164,7 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
     <Link
       ref={itemRef}
       href={`/blog/${post.slug}`}
-      className="border-b border-border flex flex-col justify-between px-5 hover:bg-[var(--hover-bg)] hover:text-[var(--hover-text)]  duration-200 transition-all"
+      className="border-b border-border flex flex-col justify-between lg:px-5 hover:bg-[var(--hover-bg)] hover:text-[var(--hover-text)]  duration-200 transition-all"
       style={
         // TODO: Improve this
         {
@@ -132,8 +174,12 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
       }
     >
       <div className="flex justify-between items-center h-full">
-        <div className="font-bold lg:text-2xl text-lg">{post.title}</div>
-        <div className="text-muted-foreground font-semibold">{post.date}</div>
+        <div className="font-bold lg:text-2xl text-lg" ref={titleRef}>
+          {post.title}
+        </div>
+        <div className="text-muted-foreground font-semibold" ref={dateRef}>
+          {post.date}
+        </div>
       </div>
     </Link>
   );

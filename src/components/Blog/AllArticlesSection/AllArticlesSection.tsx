@@ -19,7 +19,7 @@ const AllArticlesSection = () => {
       />
 
       <h2 className="lg:text-2xl text-2xl font-bold border-b border-border lg:pb-2 lg:text-end ">
-        ↘ Todos los Articulos ↘
+        ↘ Todos los Artículos ↘
       </h2>
 
       <div className="*:h-20 z-10">
