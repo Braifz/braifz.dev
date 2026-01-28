@@ -1,33 +1,36 @@
+"use client";
+
 import { allBlogs } from "@/.content-collections/generated";
-import Link from "next/link";
-import { Badge } from "../../ui/badge";
+import ArticleItem from "./ArticleItem";
+import { useRef } from "react";
 
 const AllArticlesSection = () => {
+  const previewRef = useRef<HTMLDivElement>(null);
+
   const sortedBlogs = [...allBlogs].sort((a, b) => {
     return a.order - b.order;
   });
 
   return (
-    <div className="">
+    <div className="relative">
+      <div
+        ref={previewRef}
+        className="hidden lg:block lg:fixed top-0 left-0 w-full pointer-events-none"
+      />
+
       <h2 className="lg:text-2xl text-2xl font-bold border-b border-border lg:pb-2 lg:text-end ">
         ↘ Todos los Articulos ↘
       </h2>
 
-      <div className="*:h-20">
-        {sortedBlogs.map((post) => (
-          <Link
-            href={`/blog/${post.slug}`}
+      <div className="*:h-20 z-10">
+        {sortedBlogs.map((post, index) => (
+          <ArticleItem
             key={post.slug}
-            className="border-b border-border flex flex-col justify-between"
-          >
-            <div className="flex justify-between items-center h-full">
-              <div className="font-bold lg:text-2xl text-lg">{post.title}</div>
-
-              <div className="text-muted-foreground font-semibold">
-                {post.date}
-              </div>
-            </div>
-          </Link>
+            post={post}
+            index={index}
+            previewRef={previewRef}
+            image={post.image}
+          />
         ))}
       </div>
     </div>
