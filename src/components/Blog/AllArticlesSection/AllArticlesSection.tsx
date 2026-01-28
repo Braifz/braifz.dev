@@ -2,7 +2,7 @@
 
 import { allBlogs } from "@/.content-collections/generated";
 import ArticleItem from "./ArticleItem";
-import { useRef } from "react";
+import { useRef, ViewTransition } from "react";
 
 const AllArticlesSection = () => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -13,10 +13,12 @@ const AllArticlesSection = () => {
 
   return (
     <div className="relative">
-      <div
-        ref={previewRef}
-        className="hidden lg:block lg:fixed top-0 left-0 w-full pointer-events-none"
-      />
+      <ViewTransition key="all-articles" name="all-articles">
+        <div
+          ref={previewRef}
+          className="hidden lg:block lg:fixed top-0 left-0 w-full pointer-events-none"
+        />
+      </ViewTransition>
 
       <h2 className="lg:text-2xl text-2xl font-bold border-b border-border lg:pb-2 lg:text-end ">
         ↘ Todos los Artículos ↘

@@ -114,14 +114,14 @@ export default async function Post(props: PostPageProps) {
         </ViewTransition>
       </header>
 
-      <ViewTransition key={post.slug} name={`readingTime-${post.slug}`}>
+      <ViewTransition key={post.slug} name={`date-${post.slug}`}>
         <div className="flex justify-center gap-2 lg:gap-4 my-8 lg:text-xl text-sm text-muted-foreground">
           <p>{post.readingTime}</p>·<time>{post.date}</time>
         </div>
       </ViewTransition>
 
       {post.image && (
-        <ViewTransition key={`image-${post.slug}`} name={`image-${post.slug}`}>
+        <ViewTransition key="all-articles" name="all-articles">
           <div className="lg:-mx-8">
             <Image
               src={post.image}
