@@ -20,7 +20,7 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <main className="p-4">
+    <main className="p-4 lg:p-8">
       <div className="h-10 flex items-center justify-between">
         <BreadcrumbBlog
           breadCrums={[
@@ -48,7 +48,7 @@ export default function BlogPage() {
           <PresentationBlog />
         </div>
 
-        <div className="lg:w-2/3 mt-10 lg:mt-0">
+        <div className="lg:w-2/3 mt-10 lg:mt-0 ">
           <AllArticlesSection />
         </div>
       </div>

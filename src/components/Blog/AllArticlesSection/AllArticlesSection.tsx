@@ -1,22 +1,41 @@
+// AllArticlesSection.tsx mejorado
+"use client";
+
 import { allBlogs } from "@/.content-collections/generated";
 import ArticleItem from "./ArticleItem";
+import { useRef } from "react";
 
 const AllArticlesSection = () => {
+  const previewRef = useRef<HTMLDivElement>(null);
+
   const sortedBlogs = [...allBlogs].sort((a, b) => {
     return a.order - b.order;
   });
 
   return (
-    <div className="">
+    <div className="relative">
+      <div
+        ref={previewRef}
+        className="hidden lg:block lg:fixed top-0 left-0 w-full pointer-events-none"
+      />
+
       <h2 className="lg:text-2xl text-2xl font-bold border-b border-border lg:pb-2 lg:text-end ">
         ↘ Todos los Articulos ↘
       </h2>
 
-      <div className="*:h-20">
-        {sortedBlogs.map((post) => (
-          <ArticleItem key={post.slug} post={post} />
+      <div className="*:h-20 z-10">
+        {sortedBlogs.map((post, index) => (
+          <ArticleItem
+            key={post.slug}
+            post={post}
+            index={index}
+            previewRef={previewRef}
+            image={post.image}
+          />
         ))}
       </div>
+
+      {/* Contenedor único para todas las imágenes de preview */}
     </div>
   );
 };
