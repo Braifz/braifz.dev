@@ -12,7 +12,6 @@ import { Mdx } from "mdx-components";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ViewTransition } from "react";
 
 interface PostPageProps {
   params: Promise<{
@@ -104,36 +103,30 @@ export default async function Post(props: PostPageProps) {
       <JsonLd code={jsonLd} />
 
       <header className="flex items-center justify-center ">
-        <ViewTransition key={post.slug} name={`title-${post.slug}`}>
-          <h2
-            className="lg:text-6xl text-4xl text-center font-bold lg:mt-12 mt-4"
-            id="titulo"
-          >
-            {post.title}
-          </h2>
-        </ViewTransition>
+        <h2
+          className="lg:text-6xl text-4xl text-center font-bold lg:mt-12 mt-4"
+          id="titulo"
+        >
+          {post.title}
+        </h2>
       </header>
 
-      <ViewTransition key={post.slug} name={`date-${post.slug}`}>
-        <div className="flex justify-center gap-2 lg:gap-4 my-8 lg:text-xl text-sm text-muted-foreground">
-          <p>{post.readingTime}</p>·<time>{post.date}</time>
-        </div>
-      </ViewTransition>
+      <div className="flex justify-center gap-2 lg:gap-4 my-8 lg:text-xl text-sm text-muted-foreground">
+        <p>{post.readingTime}</p>·<time>{post.date}</time>
+      </div>
 
       {post.image && (
-        <ViewTransition key="all-articles" name="all-articles">
-          <div className="lg:-mx-8">
-            <Image
-              src={post.image}
-              alt={post.title}
-              width={740}
-              height={405}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
-              className="my-8 w-full h-[400px] transition-colors bg-muted border-none object-cover"
-              priority
-            />
-          </div>
-        </ViewTransition>
+        <div className="lg:-mx-8">
+          <Image
+            src={post.image}
+            alt={post.title}
+            width={740}
+            height={405}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+            className="my-8 w-full h-[400px] transition-colors bg-muted border-none object-cover"
+            priority
+          />
+        </div>
       )}
 
       <div className="flex w-full justify-center">

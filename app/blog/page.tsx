@@ -1,7 +1,6 @@
 import AllArticlesSection from "@/src/components/Blog/AllArticlesSection/AllArticlesSection";
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import PresentationBlog from "@/src/components/Blog/PresentationBlog/PresentationBlog";
-import PrincipalPostBlog from "@/src/components/Blog/PrincipalPostBlog/PrincipalPostBlog";
 import SocialMediaLinks from "@/src/components/SocialMediaLinks/SocialMediaLinks";
 import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 
