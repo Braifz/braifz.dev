@@ -4,21 +4,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import WelcomeConsole from "@/src/components/WelcomeConsole/WelcomeConsole";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export const metadata: Metadata = {
   title: "Braifz",
@@ -42,7 +32,6 @@ export default function RootLayout({
         <WelcomeConsole />
 
         <ThemeProvider>{children}</ThemeProvider>
-        {/* <SplashCursor /> */}
       </body>
     </html>
   );

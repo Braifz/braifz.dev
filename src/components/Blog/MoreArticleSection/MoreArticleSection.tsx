@@ -6,7 +6,11 @@ interface MoreArticleSectionProps {
   relatedPosts: Blog[];
 }
 
-const MoreArticleSection = ({ relatedPosts }: MoreArticleSectionProps) => {
+const MoreArticleSection = async ({
+  relatedPosts,
+}: MoreArticleSectionProps) => {
+  "use cache";
+
   return (
     <div className="flex  flex-col md:flex-row gap-3 justify-center px-4">
       {relatedPosts.map((post) => (

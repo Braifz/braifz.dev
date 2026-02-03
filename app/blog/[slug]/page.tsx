@@ -5,6 +5,7 @@ import ProgressBar from "@/src/components/Blog/ProgressBar/ProgressBar";
 import TableOfContent from "@/src/components/Blog/TableOfContent/TableOfContent";
 import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
 import { Button } from "@/src/components/ui/button";
+import { SpinnerCustom } from "@/src/components/ui/spinner";
 import { Blog, JsonLd, WithContext } from "@/src/utils/seo/json-ld";
 import { allBlogs } from "content-collections";
 import { Undo2 } from "lucide-react";
@@ -12,6 +13,7 @@ import { Mdx } from "mdx-components";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 interface PostPageProps {
   params: Promise<{
@@ -19,11 +21,11 @@ interface PostPageProps {
   }>;
 }
 
-// export async function generateStaticParams() {
-//   return allPosts.map((post) => ({
-//     slug: post._meta.path,
-//   }));
-// }
+export async function generateStaticParams() {
+  return allBlogs.map((post) => ({
+    slug: post._meta.path,
+  }));
+}
 
 // export async function generateMetadata(props: PostPageProps) {
 //   const params = await props.params;
@@ -55,6 +57,8 @@ interface PostPageProps {
 // }
 
 export default async function Post(props: PostPageProps) {
+  "use cache";
+
   const params = await props.params;
 
   const post = allBlogs.find((post) => post._meta.path === params.slug);
@@ -75,7 +79,9 @@ export default async function Post(props: PostPageProps) {
 
   return (
     <article className="lg:mt-4 ">
-      <ProgressBar />
+      <Suspense fallback={<SpinnerCustom />}>
+        <ProgressBar />
+      </Suspense>
 
       {/* HEADER */}
       <div className="hidden lg:flex h-10 items-center justify-between">
@@ -87,7 +93,9 @@ export default async function Post(props: PostPageProps) {
           ]}
         />
 
-        <ThemeToggle />
+        <Suspense fallback={<SpinnerCustom />}>
+          <ThemeToggle />
+        </Suspense>
       </div>
 
       <div className="lg:hidden flex items-center justify-between p-4">
@@ -97,7 +105,9 @@ export default async function Post(props: PostPageProps) {
           </Button>
         </Link>
 
-        <ThemeToggle />
+        <Suspense fallback={<SpinnerCustom />}>
+          <ThemeToggle />
+        </Suspense>
       </div>
 
       <JsonLd code={jsonLd} />
@@ -140,7 +150,9 @@ export default async function Post(props: PostPageProps) {
       </div>
 
       <div className="w-full flex justify-center my-6 mt-20">
-        <GoToTopButton />
+        <Suspense fallback={<SpinnerCustom />}>
+          <GoToTopButton />
+        </Suspense>
       </div>
 
       <footer className="mt-16 mb-5 border-t border-border">
