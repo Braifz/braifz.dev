@@ -1,9 +1,10 @@
 import AllArticlesSection from "@/src/components/Blog/AllArticlesSection/AllArticlesSection";
 import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
 import PresentationBlog from "@/src/components/Blog/PresentationBlog/PresentationBlog";
-import PrincipalPostBlog from "@/src/components/Blog/PrincipalPostBlog/PrincipalPostBlog";
 import SocialMediaLinks from "@/src/components/SocialMediaLinks/SocialMediaLinks";
 import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
+import { SpinnerCustom } from "@/src/components/ui/spinner";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Braifz - Blog",
@@ -18,7 +19,9 @@ export const metadata = {
   ],
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  "use cache";
+
   return (
     <main className="p-4 lg:p-8">
       <div className="h-10 flex items-center justify-between">
@@ -35,7 +38,9 @@ export default function BlogPage() {
           ]}
         />
 
-        <ThemeToggle />
+        <Suspense fallback={<SpinnerCustom />}>
+          <ThemeToggle />
+        </Suspense>
       </div>
 
       <div className="flex gap-2 lg:mt-16 mt-10">
@@ -49,7 +54,9 @@ export default function BlogPage() {
         </div>
 
         <div className="lg:w-2/3 mt-10 lg:mt-0 ">
-          <AllArticlesSection />
+          <Suspense fallback={<SpinnerCustom />}>
+            <AllArticlesSection />
+          </Suspense>
         </div>
       </div>
 

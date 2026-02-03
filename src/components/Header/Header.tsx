@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ThemeToggle } from "../ToggleTheme/ToogleTheme";
 
-const Header = () => {
+async function Header() {
   return (
     <header className="flex justify-between lg:justify-end items-center px-6 lg:px-44 pt-2 ">
       <p className="text-xl lg:hidden font-bold text-muted-foreground italic ">
@@ -15,6 +15,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

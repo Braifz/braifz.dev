@@ -1,7 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import SocialMediaLinks from "../../SocialMediaLinks/SocialMediaLinks";
-
 const PresentationBlog = () => {
   return (
     <div className="lg:w-[400px] rounded-md h-full">

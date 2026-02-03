@@ -2,7 +2,7 @@
 
 import { Blog } from "@/.content-collections/generated";
 import Link from "next/link";
-import { useEffect, useRef, ViewTransition } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import CustomEase from "gsap/dist/CustomEase";
 import { SplitText } from "@/src/lib/gsap";
@@ -68,16 +68,6 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
           stagger: 0.05,
           ease: "power2.out",
         });
-
-        // const spans = title.querySelectorAll("span");
-
-        // titleAnimation = gsap.from(spans, {
-        //   duration: 0.5,
-        //   y: 20,
-        //   opacity: 0,
-        //   stagger: 0.05,
-        //   ease: "power2.out",
-        // });
       }
 
       const clientImgWrapper = document.createElement("div");
@@ -174,16 +164,12 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
       }
     >
       <div className="flex justify-between items-center h-full">
-        <ViewTransition key={post.slug} name={`title-${post.slug}`}>
-          <div className="font-bold lg:text-2xl text-lg" ref={titleRef}>
-            {post.title}
-          </div>
-        </ViewTransition>
-        <ViewTransition key={post.slug} name={`date-${post.slug}`}>
-          <div className="text-muted-foreground font-semibold" ref={dateRef}>
-            {post.date}
-          </div>
-        </ViewTransition>
+        <div className="font-bold lg:text-2xl text-lg" ref={titleRef}>
+          {post.title}
+        </div>
+        <div className="text-muted-foreground font-semibold" ref={dateRef}>
+          {post.date}
+        </div>
       </div>
     </Link>
   );
