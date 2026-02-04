@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import WelcomeConsole from "@/src/components/WelcomeConsole/WelcomeConsole";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,11 +25,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={` ${inter.variable} antialiased container mx-auto 
-    relative
-    min-h-screen
-    bg-background
-    `}
+          relative
+          min-h-screen
+          bg-background
+          `}
       >
+        <Analytics />
         <WelcomeConsole />
 
         <ThemeProvider>{children}</ThemeProvider>
