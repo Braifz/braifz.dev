@@ -34,7 +34,7 @@ const CubeVideo = () => {
         src={
           theme === "light"
             ? "/video/video-cube-light.mp4"
-            : "/video/cube-video.mp4"
+            : "/video/cube-dark.mp4"
         }
         type="video/mp4"
       />
