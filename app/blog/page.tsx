@@ -1,8 +1,9 @@
-import AllArticlesSection from "@/src/components/Blog/AllArticlesSection/AllArticlesSection";
-import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
-import PresentationBlog from "@/src/components/Blog/PresentationBlog/PresentationBlog";
-import SocialMediaLinks from "@/src/components/SocialMediaLinks/SocialMediaLinks";
-import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
+import { getAllPosts } from "@/src/api";
+import AllArticlesSection from "@/src/components/blog/AllArticlesSection/AllArticlesSection";
+import BreadcrumbBlog from "@/src/components/blog/BreadcrumbBlog/BreadcrumBlog";
+import PresentationBlog from "@/src/components/blog/PresentationBlog/PresentationBlog";
+import SocialMediaLinks from "@/src/components/common/SocialMediaLinks/SocialMediaLinks";
+import { ThemeToggle } from "@/src/components/common/ToggleTheme/ToogleTheme";
 import { SpinnerCustom } from "@/src/components/ui/spinner";
 import { Suspense } from "react";
 
@@ -21,6 +22,8 @@ export const metadata = {
 
 export default async function BlogPage() {
   "use cache";
+
+  const sortedBlogs = await getAllPosts();
 
   return (
     <main className="p-4 lg:p-8">
@@ -55,7 +58,7 @@ export default async function BlogPage() {
 
         <div className="lg:w-2/3 mt-10 lg:mt-0 ">
           <Suspense fallback={<SpinnerCustom />}>
-            <AllArticlesSection />
+            <AllArticlesSection sortedBlogs={sortedBlogs} />
           </Suspense>
         </div>
       </div>

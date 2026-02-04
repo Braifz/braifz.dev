@@ -1,15 +1,11 @@
 "use client";
 
-import { allBlogs } from "@/.content-collections/generated";
+import { Blog } from "@/.content-collections/generated";
 import ArticleItem from "./ArticleItem";
 import { useRef } from "react";
 
-const AllArticlesSection = () => {
+const AllArticlesSection = ({ sortedBlogs }: { sortedBlogs: Blog[] }) => {
   const previewRef = useRef<HTMLDivElement>(null);
-
-  const sortedBlogs = [...allBlogs].sort((a, b) => {
-    return a.order - b.order;
-  });
 
   return (
     <div className="relative">

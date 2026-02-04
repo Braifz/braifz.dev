@@ -1,7 +1,7 @@
-import CubeVideo from "@/src/components/CubeVideo/CubeVideo";
-import Header from "@/src/components/Header/Header";
-import PresentationHome from "@/src/components/PresentationHome/PresentationHome";
-import Scene from "@/src/components/Scene/Scene";
+import Header from "@/src/components/common/Header/Header";
+import CubeVideo from "@/src/components/home/CubeVideo/CubeVideo";
+import PresentationHome from "@/src/components/home/PresentationHome/PresentationHome";
+import Scene from "@/src/components/home/Scene/Scene";
 import { SpinnerCustom } from "@/src/components/ui/spinner";
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";

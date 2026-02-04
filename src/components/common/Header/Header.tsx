@@ -11,6 +11,15 @@ async function Header() {
         <Link href="/blog" className="text-lg hover:border-b transition-all">
           blog
         </Link>
+
+        <a
+          target="_blank"
+          href="https://docs.google.com/document/d/1TJ8nf10QHjMWUef73qEXXyTXn50co_K_8v6L1PdUR1w/edit?usp=sharing"
+          className="text-lg hover:border-b transition-all"
+        >
+          cv
+        </a>
+
         <ThemeToggle />
       </div>
     </header>
