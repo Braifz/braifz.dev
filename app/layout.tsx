@@ -23,15 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Analytics />
-
       <body
         className={` ${inter.variable} antialiased container mx-auto 
-    relative
-    min-h-screen
-    bg-background
-    `}
+          relative
+          min-h-screen
+          bg-background
+          `}
       >
+        <Analytics />
         <WelcomeConsole />
 
         <ThemeProvider>{children}</ThemeProvider>
