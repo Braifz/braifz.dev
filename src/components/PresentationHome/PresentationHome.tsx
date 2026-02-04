@@ -4,13 +4,11 @@ import { gsap, SplitText } from "@/src/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import Link from "next/link";
+import SocialMediaLinks from "../SocialMediaLinks/SocialMediaLinks";
 
 const PresentationHome = () => {
   useGSAP(() => {
     const split = SplitText.create(".split", { type: "words,chars, lines" });
-    const textOpacity = SplitText.create(".text-opacity", {
-      type: "words,chars, lines",
-    });
 
     gsap.from(split.words, {
       duration: 0.5,
@@ -18,12 +16,18 @@ const PresentationHome = () => {
       // autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       // stagger: 0.2, // 0.05 seconds between each
     });
+  }, []);
+
+  useGSAP(() => {
+    const textOpacity = SplitText.create(".text-opacity", {
+      type: "words,chars, lines",
+    });
 
     gsap.from(textOpacity.lines, {
       duration: 1,
       opacity: 0, // animate from opacity: 0
       // autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
-      stagger: 0.1, // 0.05 seconds between each
+      stagger: 0.2, // 0.05 seconds between each
     });
   }, []);
 
@@ -50,33 +54,7 @@ const PresentationHome = () => {
         </span>
       </p>
       <div className="flex lg:gap-20 gap-10 justify-center lg:mt-8 mt-10 lg:pr-20 ">
-        <Link
-          href="https://linkedin.com/in/braifz"
-          target="_blank"
-          className="bg-white border w-10 h-10 rounded-full lg:p-2 hover:scale-110 transition-all flex items-center justify-center"
-        >
-          <Image
-            src="/logos/linkedin.svg"
-            alt="LinkedIn"
-            width={16}
-            height={16}
-            className="cursor-pointer "
-          />
-        </Link>
-        <Link
-          href="https://github.com/braifz"
-          target="_blank"
-          className="bg-white border w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
-        >
-          <Image src="/logos/github.svg" alt="GitHub" width={16} height={16} />
-        </Link>
-        <Link
-          href="https://x.com/braifz"
-          target="_blank"
-          className="bg-white border w-10 h-10 rounded-full p-2 hover:scale-110 transition-all flex items-center justify-center"
-        >
-          <Image src="/logos/x.svg" alt="X" width={16} height={16} />
-        </Link>
+        <SocialMediaLinks />
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export async function CodeBlock(props: Props) {
   });
   return (
     <div
-      className="overflow-x-auto rounded-lg max-w-full"
+      className="overflow-x-auto max-w-full"
       dangerouslySetInnerHTML={{ __html: out }}
     />
   );
@@ -176,7 +176,7 @@ const components: MDXComponents = {
   code: ({ className, ...props }) => (
     <code
       className={cn(
-        "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
+        "relative px-[0.3rem] py-[0.2rem] font-mono text-sm rounded-none",
         className,
       )}
       {...props}

@@ -7,6 +7,7 @@ import { useRef } from "react";
 const AllArticlesSection = () => {
   const previewRef = useRef<HTMLDivElement>(null);
 
+  // TODO: Move this query to another function and add cache using "use cache" and add a tag for revalidation
   const sortedBlogs = [...allBlogs].sort((a, b) => {
     return a.order - b.order;
   });
