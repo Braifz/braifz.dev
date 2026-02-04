@@ -8,7 +8,7 @@ const GoToTopButton = () => {
     <Button
       variant={"ghost"}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="p-3 border flex gap-3 items-center"
+      className="p-3 border border-border flex gap-3 items-center rounded-none cursor-pointer"
     >
       <ArrowUp className="w-5 h-5" />
       Volver al principio

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import WelcomeConsole from "@/src/components/WelcomeConsole/WelcomeConsole";
+import WelcomeConsole from "@/src/components/common/WelcomeConsole/WelcomeConsole";
 import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
@@ -31,7 +31,7 @@ export default function RootLayout({
           `}
       >
         <Analytics />
-        <WelcomeConsole />
+        {/* <WelcomeConsole /> */}
 
         <ThemeProvider>{children}</ThemeProvider>
       </body>

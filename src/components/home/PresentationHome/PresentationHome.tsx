@@ -2,13 +2,11 @@
 
 import { gsap, SplitText } from "@/src/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
-import Link from "next/link";
-import SocialMediaLinks from "../SocialMediaLinks/SocialMediaLinks";
+import SocialMediaLinks from "../../common/SocialMediaLinks/SocialMediaLinks";
 
 const PresentationHome = () => {
   useGSAP(() => {
-    const split = SplitText.create(".split", { type: "words,chars, lines" });
+    const split = SplitText.create(".split", { type: "words" });
 
     gsap.from(split.words, {
       duration: 0.5,
@@ -20,11 +18,11 @@ const PresentationHome = () => {
 
   useGSAP(() => {
     const textOpacity = SplitText.create(".text-opacity", {
-      type: "words,chars, lines",
+      type: "lines",
     });
 
     gsap.from(textOpacity.lines, {
-      duration: 1,
+      duration: 0.8,
       opacity: 0, // animate from opacity: 0
       // autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       stagger: 0.2, // 0.05 seconds between each

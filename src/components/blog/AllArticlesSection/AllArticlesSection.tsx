@@ -1,16 +1,11 @@
 "use client";
 
-import { allBlogs } from "@/.content-collections/generated";
+import { Blog } from "@/.content-collections/generated";
 import ArticleItem from "./ArticleItem";
 import { useRef } from "react";
 
-const AllArticlesSection = () => {
+const AllArticlesSection = ({ sortedBlogs }: { sortedBlogs: Blog[] }) => {
   const previewRef = useRef<HTMLDivElement>(null);
-
-  // TODO: Move this query to another function and add cache using "use cache" and add a tag for revalidation
-  const sortedBlogs = [...allBlogs].sort((a, b) => {
-    return a.order - b.order;
-  });
 
   return (
     <div className="relative">

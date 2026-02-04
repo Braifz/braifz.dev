@@ -1,9 +1,10 @@
-import BreadcrumbBlog from "@/src/components/Blog/BreadcrumbBlog/BreadcrumBlog";
-import GoToTopButton from "@/src/components/Blog/GoToTopButtton/GoToTopButton";
-import MoreArticleSection from "@/src/components/Blog/MoreArticleSection/MoreArticleSection";
-import ProgressBar from "@/src/components/Blog/ProgressBar/ProgressBar";
-import TableOfContent from "@/src/components/Blog/TableOfContent/TableOfContent";
-import { ThemeToggle } from "@/src/components/ToggleTheme/ToogleTheme";
+import { getPostBySlug, getRelatedPosts } from "@/src/api";
+import BreadcrumbBlog from "@/src/components/blog/BreadcrumbBlog/BreadcrumBlog";
+import GoToTopButton from "@/src/components/blog/GoToTopButtton/GoToTopButton";
+import MoreArticleSection from "@/src/components/blog/MoreArticleSection/MoreArticleSection";
+import ProgressBar from "@/src/components/blog/ProgressBar/ProgressBar";
+import TableOfContent from "@/src/components/blog/TableOfContent/TableOfContent";
+import { ThemeToggle } from "@/src/components/common/ToggleTheme/ToogleTheme";
 import { Button } from "@/src/components/ui/button";
 import { SpinnerCustom } from "@/src/components/ui/spinner";
 import { Blog, JsonLd, WithContext } from "@/src/utils/seo/json-ld";
@@ -61,11 +62,9 @@ export default async function Post(props: PostPageProps) {
 
   const params = await props.params;
 
-  const post = allBlogs.find((post) => post._meta.path === params.slug);
+  const post = await getPostBySlug(params.slug);
 
-  const relatedPosts = allBlogs
-    .filter((post) => post._meta.path !== params.slug)
-    .slice(0, 3);
+  const relatedPosts = await getRelatedPosts(params.slug);
 
   if (!post) {
     return notFound();

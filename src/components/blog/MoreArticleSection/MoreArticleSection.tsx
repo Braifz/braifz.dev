@@ -15,7 +15,7 @@ const MoreArticleSection = async ({
     <div className="flex  flex-col md:flex-row gap-3 justify-center px-4">
       {relatedPosts.map((post) => (
         <Link key={post.slug} href={{ pathname: `/blog/${post.slug}` }}>
-          <div className="lg:w-80 border border-border p-3 wrap-break-word rounded-sm max-h-[400px] md:min-h-[400px] space-y-3">
+          <div className="lg:w-80 border border-border p-3 wrap-break-word max-h-[400px] md:min-h-[400px] space-y-3">
             <Image
               src={post.image}
               alt={post.title}
