@@ -1,0 +1,131 @@
+---
+title: "Cache Components - Next.js 16"
+summary: "Next.js 16 introduce Cache Components, una nueva forma de cachear componentes en tu aplicación."
+date: Feb 4, 2026
+author: "Braifz"
+image: "/blog/cache-components/cover.jpg"
+category: "Next.js"
+order: 6
+---
+
+Next.js introdujo una nueva forma de renderizar components y con ello una nueva forma de cachearlos también. A estas features Next.js les llama "Caché Components" y "Partial Prerendering" sobre esto hablaré en este artículo. Ponete comodo.
+
+## Habilitar caché components
+
+Lo primero que tenemos que hacer para poder usar caché components es habilitarlo y para ello hay que ir al file de config de Next.js y debemos agregar una propiedad cacheComponents en true.
+
+```typescript
+const nextConfig: NextConfig = {
+  cacheComponents: true,
+  // ...Others configs...
+};
+```
+
+Una vez agregada esa propiedad ahora se habilitan los caché components y al mismo tiempo se habilita PPR (Partial Prerendering).
+
+A tener en cuenta es si estas usando `Route Segment Config` en tu proyecto esto te va a dar error. Ya que caché components viene a cambiar como se configura eso.
+
+## Que vamos a armar?
+
+Vamos a armar una especie de app de libros, donde va a tener las siguiente secciones/components:
+
+- Header
+- Presentation
+- Daily Best Seller
+- All Books
+- Footer
+
+El código del proyecto ya terminado -> [https://github.com/Braifz/cache-components-next-16](https://github.com/Braifz/cache-components-next-16)
+
+La idea es armar algo así:
+
+![proyect-structure](/blog/cache-components/image1.png)
+
+<img
+  src="/blog/cache-components/kisschef.gif"
+  alt="Chef's kiss perfecto"
+  className="w-96 h-auto mx-auto mt-10 rounded-full"
+/>
+
+## Partial Prerendering
+
+Entra a la cancha este jugador, Partial Prerendering (PPR) permitiendo hacer páginas de Next.js estaticas con huecos para agregar componentes dinamicos dentro de ellas.
+
+Dentro del ejemplo que pusimos, nosotros queremos armar una página estatica pero con una sección dinamica en el medio.
+
+Donde los componentes DailyBestSeller y AllBooks hacen request yendo a buscar data externa por ende son dinámicos.
+
+Quedaría algo así:
+
+![ppr-structure](/blog/cache-components/image2.png)
+
+Al hacer eso Next.js no va a dar el siguiente error:
+
+![ppr-error](/blog/cache-components/image3.png)
+
+Podemos hacer dos cosas para solucionarlo:
+
+- Usamos "use cache" para que el componente dinamico se cacheé y se vuelva "static" ya que Next.js no va a tener que hacer la request en runtime a menos que revalidate se cumpla.
+
+- Ponemos nuestro componente dentro de un Suspense Boundary y de esa manera le decimos a Next.js que este componente es dinamico y que haga la petición en cada request, ya que queremos la data más actualizada posible y que cuando la petición se complete muestre el contenido mientras tanto mostra un loading.
+
+En caso del component DailyBestSeller vamos a cachearlo ya que esa información solo deberia cambiar una vez al dia (el libro más vendido el día anterior) y con AllBooks vamos a dejarlo dinamico para mostrar siempre la data fresca.
+
+Algo como esto:
+
+![ppr-components](/blog/cache-components/image4.png)
+
+Bueno, y el código quedaría algo así:
+
+```typescript
+
+// Page with Partial Prerendering
+export default async function Home() {
+	return (
+		<div>
+          {/* Static content - Using Static Shell and is pre-rendered */}
+          <Presentation />
+
+          {/* Cached content - Cached for the lifetime inside the component */}
+          <BestSellerSection />
+
+          {/* Dynamic content - Revalidated on every request */}
+          <Suspense fallback={<Spinner />}>
+              <AllBooks />
+          </Suspense>
+        </div>
+    );
+}
+```
+
+## "use cache"
+
+Dentro del componente `BestSellerSection` vamos a usar "use cache" para que el componente se cacheé y se vuelva "static" ya que Next.js no va a tener que hacer la request en runtime a menos que revalidate se cumpla.
+
+a nivel código queda así:
+
+```typescript
+
+const BestSellerSection = async () => {
+  // This component is cached
+  "use cache";
+
+  cacheLife("days"); // Cache for 1 day
+
+  const bestSeller = await getBestSeller();
+
+  return (
+    <div>
+      {/* all the content */}
+    </div>
+  );
+}
+```
+
+## Conclusion
+
+En este artículo vimos como activar cache components y como funciona PPR (Partial Prerendering). También vimos cómo usar "use cache" para cachear componentes en Next.js y cómo usar Suspense para hacer componentes dinámicos.
+
+### Recursos
+
+- [Next.js Cache Components](https://nextjs.org/docs/app/getting-started/cache-components)
