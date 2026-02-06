@@ -48,7 +48,7 @@ export default async function BlogPage() {
 
       <div className="flex gap-2 lg:mt-16 mt-10">
         <h1 className="text-5xl lg:text-8xl font-bold">Blog</h1>
-        <p className="text-sm text-muted-foreground">(5)</p>
+        <p className="text-sm text-muted-foreground">(6)</p>
       </div>
 
       <div className="flex flex-col lg:flex-row lg:gap-6 mb-10 mt-10">
