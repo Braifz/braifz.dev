@@ -1,6 +1,6 @@
 ---
-title: "Cache Components - Next.js 16"
-summary: "Next.js 16 introduce Cache Components, una nueva forma de cachear componentes en tu aplicación."
+title: "Cache Components - Next.js"
+summary: "Next.js introduce Cache Components, una nueva forma de cachear componentes en tu aplicación."
 date: Feb 5, 2026
 author: "Braifz"
 image: "/blog/cache-components/cover.jpg"
@@ -8,11 +8,11 @@ category: "Next.js"
 order: 1
 ---
 
-Next.js introdujo una nueva forma de renderizar components y con ello una nueva forma de cachearlos también. A estas features Next.js les llama "Caché Components" y "Partial Prerendering" sobre esto hablaré en este artículo. Ponete cómodo.
+Next.js introdujo una nueva forma de renderizar components y, con ello, una nueva forma de cachearlos. A estas features Next.js les llama "Cache Components" y "Partial Prerendering" sobre esto hablaré en este artículo. Ponete cómodo.
 
-## Habilitar caché components
+## Habilitar cache components
 
-Lo primero que tenés que hacer para poder usar caché components es habilitarlo y para ello hay que ir al file de config de Next.js y debemos agregar una propiedad cacheComponents en true.
+Lo primero que tenés que hacer para poder usar cache components es habilitarlo y para ello hay que ir al file de config de Next.js y debemos agregar una propiedad cacheComponents en true.
 
 ```typescript
 const nextConfig: NextConfig = {
@@ -21,13 +21,13 @@ const nextConfig: NextConfig = {
 };
 ```
 
-Una vez agregada esa propiedad ahora se habilitan los caché components y al mismo tiempo se habilita PPR (Partial Prerendering).
+Una vez agregada esa propiedad se habilitan los cache components y al mismo tiempo se habilita PPR (Partial Prerendering).
 
-A tener en cuenta es si estas usando `Route Segment Config` en tu proyecto esto te va a dar error. Ya que caché components viene a cambiar como se configura eso.
+A tener en cuenta es si estás usando `Route Segment Config` en tu proyecto esto te va a dar error. Ya que cache components viene a cambiar como se configura eso.
 
 ## Que vamos a armar?
 
-Vamos a armar una especie de app de libros, donde va a tener las siguiente secciones/components:
+Vamos a armar una especie de app de libros, que va a tener las siguientes secciones:
 
 - Header
 - Presentation
@@ -49,9 +49,9 @@ La idea es armar algo así:
 
 ## Partial Prerendering
 
-Entra a la cancha este jugador, Partial Prerendering (PPR) permitiendo hacer páginas de Next.js estaticas con huecos para agregar componentes dinamicos dentro de ellas.
+Entra a la cancha este jugador, Partial Prerendering (PPR) permitiendo hacer páginas de Next.js estáticas con huecos para agregar componentes dinámicos dentro de ellas.
 
-Dentro del ejemplo que pusimos, nosotros queremos armar una página estatica pero con una sección dinamica en el medio.
+Dentro del ejemplo que pusimos, nosotros queremos armar una página estática pero con una sección dinámica en el medio.
 
 Donde los componentes DailyBestSeller y AllBooks hacen request yendo a buscar data externa por ende son dinámicos.
 
@@ -65,11 +65,11 @@ Al hacer eso Next.js no va a dar el siguiente error:
 
 Podemos hacer dos cosas para solucionarlo:
 
-- Usamos "use cache" para que el componente dinamico se cacheé y se vuelva "static" ya que Next.js no va a tener que hacer la request en runtime a menos que revalidate se cumpla.
+- Usamos "use cache" para que el componente dinámico se cacheé y se vuelva "static" ya que Next.js no va a tener que hacer la request en runtime a menos que revalidate se cumpla.
 
-- Ponemos nuestro componente dentro de un Suspense Boundary y de esa manera le decimos a Next.js que este componente es dinamico y que haga la petición en cada request, ya que queremos la data más actualizada posible y que cuando la petición se complete muestre el contenido mientras tanto mostra un loading.
+- Ponemos nuestro componente dentro de un Suspense Boundary y de esa manera le decimos a Next.js que este componente es dinámico y que haga la petición en cada request, ya que queremos la data más actualizada posible y que cuando la petición se complete muestre el contenido mientras tanto mostrame un loading.
 
-En caso del component DailyBestSeller vamos a cachearlo ya que esa información solo deberia cambiar una vez al dia (el libro más vendido el día anterior) y con AllBooks vamos a dejarlo dinamico para mostrar siempre la data fresca.
+En caso del component DailyBestSeller vamos a cachearlo ya que esa información solo debería cambiar una vez al día (el libro más vendido el día anterior) y con AllBooks vamos a dejarlo dinámico para mostrar siempre la data fresca.
 
 Algo como esto:
 
@@ -126,7 +126,7 @@ const BestSellerSection = async () => {
 
 - Usar "use cache" en un componente que no es async.
 - Usar `Route Segment Config` en lugar de "use cache" y `cacheLife()`.
-- No acceder a cookies() o headers() en 'use cache'.
+- Acceder a cookies() o headers() dentro de un componente que usa "use cache".
 
 ## Conclusion
 
