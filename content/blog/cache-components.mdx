@@ -1,18 +1,18 @@
 ---
 title: "Cache Components - Next.js 16"
 summary: "Next.js 16 introduce Cache Components, una nueva forma de cachear componentes en tu aplicación."
-date: Feb 4, 2026
+date: Feb 5, 2026
 author: "Braifz"
 image: "/blog/cache-components/cover.jpg"
 category: "Next.js"
-order: 6
+order: 1
 ---
 
-Next.js introdujo una nueva forma de renderizar components y con ello una nueva forma de cachearlos también. A estas features Next.js les llama "Caché Components" y "Partial Prerendering" sobre esto hablaré en este artículo. Ponete comodo.
+Next.js introdujo una nueva forma de renderizar components y con ello una nueva forma de cachearlos también. A estas features Next.js les llama "Caché Components" y "Partial Prerendering" sobre esto hablaré en este artículo. Ponete cómodo.
 
 ## Habilitar caché components
 
-Lo primero que tenemos que hacer para poder usar caché components es habilitarlo y para ello hay que ir al file de config de Next.js y debemos agregar una propiedad cacheComponents en true.
+Lo primero que tenés que hacer para poder usar caché components es habilitarlo y para ello hay que ir al file de config de Next.js y debemos agregar una propiedad cacheComponents en true.
 
 ```typescript
 const nextConfig: NextConfig = {
@@ -44,7 +44,7 @@ La idea es armar algo así:
 <img
   src="/blog/cache-components/kisschef.gif"
   alt="Chef's kiss perfecto"
-  className="w-96 h-auto mx-auto mt-10 rounded-full"
+  className="w-96 h-auto mx-auto mt-10"
 />
 
 ## Partial Prerendering
@@ -122,10 +122,25 @@ const BestSellerSection = async () => {
 }
 ```
 
+## Errores comunes
+
+- Usar "use cache" en un componente que no es async.
+- Usar `Route Segment Config` en lugar de "use cache" y `cacheLife()`.
+- No acceder a cookies() o headers() en 'use cache'.
+
 ## Conclusion
 
 En este artículo vimos como activar cache components y como funciona PPR (Partial Prerendering). También vimos cómo usar "use cache" para cachear componentes en Next.js y cómo usar Suspense para hacer componentes dinámicos.
 
+Cosas que no hable y que tal vez en otro artículo escriba sobre ello:
+
+- Cómo usar "cache tags" para invalidar cache de forma manual y revalidar componentes
+- Cómo usar "cache headers" para controlar el cache de forma más granular
+
 ### Recursos
 
 - [Next.js Cache Components](https://nextjs.org/docs/app/getting-started/cache-components)
+
+---
+
+<img src="/blog/cache-components/homero-chau.gif" alt="cache components" />
