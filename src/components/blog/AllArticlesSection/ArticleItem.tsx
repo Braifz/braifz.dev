@@ -2,161 +2,75 @@
 
 import { Blog } from "@/.content-collections/generated";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import CustomEase from "gsap/dist/CustomEase";
-import { SplitText } from "@/src/lib/gsap";
+import { useRef, useCallback, memo } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap, SplitText } from "@/src/lib/gsap";
 
 interface ArticleItemProps {
   post: Blog;
   index: number;
-  previewRef: React.RefObject<HTMLDivElement | null>;
   image: string;
+  onHover: (index: number, image: string, title: string) => void;
+  onLeave: () => void;
 }
 
-const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
+const ArticleItem = memo(function ArticleItem({
+  post,
+  index,
+  image,
+  onHover,
+  onLeave,
+}: ArticleItemProps) {
   const itemRef = useRef<HTMLAnchorElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const activeIndexRef = useRef<number>(-1);
   const dateRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    gsap.registerPlugin(CustomEase);
-    CustomEase.create(
-      "hop",
-      "M0,0 C0.071,0.505 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1",
-    );
+  useGSAP(
+    () => {
+      if (!titleRef.current || !dateRef.current) return;
 
-    const item = itemRef.current;
-    const preview = previewRef.current;
-    const title = titleRef.current;
-    const date = dateRef.current;
+      const titleSplit = SplitText.create(titleRef.current, { type: "lines" });
+      const dateSplit = SplitText.create(dateRef.current, { type: "lines" });
 
-    if (!item || !preview) return;
-
-    let activeClientImgWrapper: HTMLDivElement | null = null;
-    let activeClientImg: HTMLImageElement | null = null;
-    let titleAnimation: gsap.core.Tween | null = null;
-    let dateAnimation: gsap.core.Tween | null = null;
-
-    const handleMouseOver = () => {
-      if (activeIndexRef.current === index) return;
-
-      if (activeIndexRef.current !== -1 && activeClientImgWrapper) {
-        const mouseoutEvent = new Event("mouseout");
-        item.dispatchEvent(mouseoutEvent);
-      }
-
-      activeIndexRef.current = index;
-
-      if (title) {
-        const split = SplitText.create(title, { type: "lines" });
-        const splitDate = SplitText.create(date, { type: "lines" });
-
-        titleAnimation = gsap.from(split.lines, {
-          duration: 0.5,
-          y: 20,
-          opacity: 0,
-          stagger: 0.05,
-          ease: "power2.out",
-        });
-
-        dateAnimation = gsap.from(splitDate.lines, {
-          duration: 0.5,
-          y: 20,
-          opacity: 0,
-          stagger: 0.05,
-          ease: "power2.out",
-        });
-      }
-
-      const clientImgWrapper = document.createElement("div");
-      clientImgWrapper.className =
-        "absolute inset-0 w-[40px] h-dvh top-0 overflow-hidden -z-10 ";
-
-      const clientImg = document.createElement("img");
-      clientImg.src = image;
-      clientImg.className = "w-full h-full object-cover -z-10 top-20";
-
-      gsap.set(clientImg, { scale: 1.25, opacity: 0 });
-
-      clientImgWrapper.appendChild(clientImg);
-      preview.appendChild(clientImgWrapper);
-
-      activeClientImgWrapper = clientImgWrapper;
-      activeClientImg = clientImg;
-
-      gsap.fromTo(
-        clientImgWrapper,
-        { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" },
-        {
-          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          duration: 0.5,
-          ease: "hop",
-        },
-      );
-
-      gsap.to(clientImg, {
-        opacity: 1,
-        duration: 0.25,
+      gsap.from(titleSplit.lines, {
+        duration: 0.5,
+        y: 20,
+        opacity: 0,
+        stagger: 0.05,
         ease: "power2.out",
       });
 
-      gsap.to(clientImg, {
-        scale: 1,
-        duration: 1.25,
-        ease: "hop",
+      gsap.from(dateSplit.lines, {
+        duration: 0.3,
+        y: 20,
+        stagger: 0.05,
+        ease: "power2.out",
       });
-    };
 
-    const handleMouseOut = (event: MouseEvent) => {
-      if (event.relatedTarget && item.contains(event.relatedTarget as Node)) {
-        return;
-      }
+      return () => {
+        titleSplit.revert();
+        dateSplit.revert();
+      };
+    },
+    { scope: itemRef },
+  );
 
-      if (titleAnimation) {
-        // titleAnimation.reverse();
-      }
+  const handleMouseEnter = useCallback(() => {
+    onHover(index, image, post.title);
+  }, [index, image, post.title, onHover]);
 
-      if (activeClientImg && activeClientImgWrapper) {
-        const clientImgToRemove = activeClientImg;
-        const clientImgWrapperToRemove = activeClientImgWrapper;
-
-        activeClientImg = null;
-        activeClientImgWrapper = null;
-        activeIndexRef.current = -1;
-
-        gsap.to(clientImgToRemove, {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power1.out",
-          onComplete: () => {
-            clientImgWrapperToRemove.remove();
-          },
-        });
-      }
-    };
-
-    item.addEventListener("mouseover", handleMouseOver);
-    item.addEventListener("mouseout", handleMouseOut);
-
-    return () => {
-      item.removeEventListener("mouseover", handleMouseOver);
-      item.removeEventListener("mouseout", handleMouseOut);
-
-      if (activeClientImgWrapper) {
-        activeClientImgWrapper.remove();
-      }
-    };
-  }, [index, previewRef]);
+  const handleMouseLeave = useCallback(() => {
+    onLeave();
+  }, [onLeave]);
 
   return (
     <Link
       ref={itemRef}
       href={`/blog/${post.slug}`}
-      className="border-b border-border flex flex-col justify-between lg:px-5 hover:bg-[var(--hover-bg)] hover:text-[var(--hover-text)]  duration-200 transition-all"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="border-b border-border flex flex-col justify-between lg:px-5 hover:bg-[var(--hover-bg)] hover:text-[var(--hover-text)] duration-200 transition-all"
       style={
-        // TODO: Improve this
         {
           "--hover-bg": "light-dark(#000000, #f3f4f6)",
           "--hover-text": "light-dark(#ffffff, #000000)",
@@ -173,6 +87,6 @@ const ArticleItem = ({ post, index, previewRef, image }: ArticleItemProps) => {
       </div>
     </Link>
   );
-};
+});
 
 export default ArticleItem;
