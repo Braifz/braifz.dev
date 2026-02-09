@@ -3,34 +3,36 @@
 import { gsap, SplitText } from "@/src/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import SocialMediaLinks from "../../common/SocialMediaLinks/SocialMediaLinks";
+import { useRef } from "react";
 
 const PresentationHome = () => {
-  useGSAP(() => {
-    const split = SplitText.create(".split", { type: "words" });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    gsap.from(split.words, {
-      duration: 0.5,
-      y: 100, // animate from 100px below
-      // autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
-      // stagger: 0.2, // 0.05 seconds between each
-    });
-  }, []);
+  useGSAP(
+    () => {
+      const splitWords = SplitText.create(".split", { type: "words" });
+      const splitOpacity = SplitText.create(".text-opacity", { type: "lines" });
 
-  useGSAP(() => {
-    const textOpacity = SplitText.create(".text-opacity", {
-      type: "lines",
-    });
+      const tl = gsap.timeline();
 
-    gsap.from(textOpacity.lines, {
-      duration: 0.8,
-      opacity: 0, // animate from opacity: 0
-      // autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
-      stagger: 0.2, // 0.05 seconds between each
-    });
-  }, []);
-
+      tl.from(splitWords.words, {
+        duration: 0.5,
+        y: 100,
+        opacity: 0,
+        stagger: 0.01,
+      }).from(splitOpacity.lines, {
+        duration: 0.3,
+        opacity: 0,
+        stagger: 0.1,
+      });
+    },
+    { scope: containerRef },
+  );
   return (
-    <div className="mt-10 lg:mt-0 text-center lg:text-left mb-10">
+    <div
+      ref={containerRef}
+      className="mt-10 lg:mt-0 text-center lg:text-left mb-10"
+    >
       <div>
         <h4 className="hidden lg:block text-2xl font-bold pl-1 pb-2 text-muted-foreground">
           <span className="text-opacity" aria-label="Braifz">
