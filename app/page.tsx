@@ -25,7 +25,7 @@ export default async function Home() {
         <CubeVideo />
       </Suspense>
 
-      <div className="flex flex-col lg:flex-row lg:mt-5">
+      <div className="flex flex-col lg:flex-row lg:mt-10  ">
         {/* Presentation Section  */}
         <div className="lg:w-1/2 flex flex-col justify-center lg:pl-14">
           <PresentationHome />
