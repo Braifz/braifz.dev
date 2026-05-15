@@ -7,7 +7,7 @@ const PresentationBlog = () => {
       <p className="text-base mt-4 font-sans pr-10">
         ¡Bienvenido/a a mi blog! Escribo sobre tecnología, ideas y cosas que
         estoy aprendiendo. Escribo para pensar mejor. Escribo primero para mí.
-        Si a alguien más le sirve, mejor. Intentar, fallar y seguir aprendiendo.
+        Si a alguien más le sirve, mejor
       </p>
     </div>
   );
